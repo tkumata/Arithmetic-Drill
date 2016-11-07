@@ -1,0 +1,324 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8965BC401DD022EB00E20CAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965BC3F1DD022EB00E20CAE /* AppDelegate.swift */; };
+		8965BC421DD022EB00E20CAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965BC411DD022EB00E20CAE /* ViewController.swift */; };
+		8965BC451DD022EB00E20CAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8965BC431DD022EB00E20CAE /* Main.storyboard */; };
+		8965BC481DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8965BC461DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodeld */; };
+		8965BC4A1DD022EB00E20CAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8965BC491DD022EB00E20CAE /* Assets.xcassets */; };
+		8965BC4D1DD022EB00E20CAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8965BC4B1DD022EB00E20CAE /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8965BC3C1DD022EA00E20CAE /* Arithmetic Drill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arithmetic Drill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8965BC3F1DD022EB00E20CAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8965BC411DD022EB00E20CAE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8965BC441DD022EB00E20CAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8965BC471DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Arithmetic_Drill.xcdatamodel; sourceTree = "<group>"; };
+		8965BC491DD022EB00E20CAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8965BC4C1DD022EB00E20CAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8965BC4E1DD022EB00E20CAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8965BC391DD022EA00E20CAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8965BC331DD022EA00E20CAE = {
+			isa = PBXGroup;
+			children = (
+				8965BC3E1DD022EA00E20CAE /* Arithmetic Drill */,
+				8965BC3D1DD022EA00E20CAE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8965BC3D1DD022EA00E20CAE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8965BC3C1DD022EA00E20CAE /* Arithmetic Drill.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8965BC3E1DD022EA00E20CAE /* Arithmetic Drill */ = {
+			isa = PBXGroup;
+			children = (
+				8965BC3F1DD022EB00E20CAE /* AppDelegate.swift */,
+				8965BC411DD022EB00E20CAE /* ViewController.swift */,
+				8965BC431DD022EB00E20CAE /* Main.storyboard */,
+				8965BC491DD022EB00E20CAE /* Assets.xcassets */,
+				8965BC4B1DD022EB00E20CAE /* LaunchScreen.storyboard */,
+				8965BC4E1DD022EB00E20CAE /* Info.plist */,
+				8965BC461DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodeld */,
+			);
+			path = "Arithmetic Drill";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8965BC3B1DD022EA00E20CAE /* Arithmetic Drill */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8965BC511DD022EB00E20CAE /* Build configuration list for PBXNativeTarget "Arithmetic Drill" */;
+			buildPhases = (
+				8965BC381DD022EA00E20CAE /* Sources */,
+				8965BC391DD022EA00E20CAE /* Frameworks */,
+				8965BC3A1DD022EA00E20CAE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Arithmetic Drill";
+			productName = "Arithmetic Drill";
+			productReference = 8965BC3C1DD022EA00E20CAE /* Arithmetic Drill.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8965BC341DD022EA00E20CAE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "KUMATA Tomokatsu";
+				TargetAttributes = {
+					8965BC3B1DD022EA00E20CAE = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = RA8AYBBYPE;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 8965BC371DD022EA00E20CAE /* Build configuration list for PBXProject "Arithmetic Drill" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8965BC331DD022EA00E20CAE;
+			productRefGroup = 8965BC3D1DD022EA00E20CAE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8965BC3B1DD022EA00E20CAE /* Arithmetic Drill */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8965BC3A1DD022EA00E20CAE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8965BC4D1DD022EB00E20CAE /* LaunchScreen.storyboard in Resources */,
+				8965BC4A1DD022EB00E20CAE /* Assets.xcassets in Resources */,
+				8965BC451DD022EB00E20CAE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8965BC381DD022EA00E20CAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8965BC421DD022EB00E20CAE /* ViewController.swift in Sources */,
+				8965BC401DD022EB00E20CAE /* AppDelegate.swift in Sources */,
+				8965BC481DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8965BC431DD022EB00E20CAE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8965BC441DD022EB00E20CAE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8965BC4B1DD022EB00E20CAE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8965BC4C1DD022EB00E20CAE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8965BC4F1DD022EB00E20CAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8965BC501DD022EB00E20CAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8965BC521DD022EB00E20CAE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RA8AYBBYPE;
+				INFOPLIST_FILE = "Arithmetic Drill/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.kmt.Arithmetic-Drill";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		8965BC531DD022EB00E20CAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RA8AYBBYPE;
+				INFOPLIST_FILE = "Arithmetic Drill/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.kmt.Arithmetic-Drill";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8965BC371DD022EA00E20CAE /* Build configuration list for PBXProject "Arithmetic Drill" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8965BC4F1DD022EB00E20CAE /* Debug */,
+				8965BC501DD022EB00E20CAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8965BC511DD022EB00E20CAE /* Build configuration list for PBXNativeTarget "Arithmetic Drill" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8965BC521DD022EB00E20CAE /* Debug */,
+				8965BC531DD022EB00E20CAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8965BC461DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8965BC471DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodel */,
+			);
+			currentVersion = 8965BC471DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodel */;
+			path = Arithmetic_Drill.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 8965BC341DD022EA00E20CAE /* Project object */;
+}
