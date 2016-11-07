@@ -10,8 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBAction func backToHome (segue: UIStoryboardSegue) {
-    }
+    // 各画面から戻るボタン
+    @IBAction func backToHome (segue: UIStoryboardSegue) {}
     
     override func viewDidLoad() {
         super.viewDidLoad()

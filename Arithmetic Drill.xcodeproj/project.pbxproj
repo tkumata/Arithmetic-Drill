@@ -13,6 +13,8 @@
 		8965BC481DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8965BC461DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodeld */; };
 		8965BC4A1DD022EB00E20CAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8965BC491DD022EB00E20CAE /* Assets.xcassets */; };
 		8965BC4D1DD022EB00E20CAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8965BC4B1DD022EB00E20CAE /* LaunchScreen.storyboard */; };
+		89CB521F1DD04AAC00DEBD89 /* ArithmeticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CB521E1DD04AAC00DEBD89 /* ArithmeticViewController.swift */; };
+		89EE87431DD05ACB0006F632 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE87421DD05ACB0006F632 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		8965BC491DD022EB00E20CAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8965BC4C1DD022EB00E20CAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8965BC4E1DD022EB00E20CAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89CB521E1DD04AAC00DEBD89 /* ArithmeticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArithmeticViewController.swift; sourceTree = "<group>"; };
+		89EE87421DD05ACB0006F632 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 			children = (
 				8965BC3F1DD022EB00E20CAE /* AppDelegate.swift */,
 				8965BC411DD022EB00E20CAE /* ViewController.swift */,
+				89CB521E1DD04AAC00DEBD89 /* ArithmeticViewController.swift */,
+				89EE87421DD05ACB0006F632 /* SettingsViewController.swift */,
 				8965BC431DD022EB00E20CAE /* Main.storyboard */,
 				8965BC491DD022EB00E20CAE /* Assets.xcassets */,
 				8965BC4B1DD022EB00E20CAE /* LaunchScreen.storyboard */,
@@ -142,6 +148,8 @@
 			files = (
 				8965BC421DD022EB00E20CAE /* ViewController.swift in Sources */,
 				8965BC401DD022EB00E20CAE /* AppDelegate.swift in Sources */,
+				89CB521F1DD04AAC00DEBD89 /* ArithmeticViewController.swift in Sources */,
+				89EE87431DD05ACB0006F632 /* SettingsViewController.swift in Sources */,
 				8965BC481DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +312,7 @@
 				8965BC531DD022EB00E20CAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
