@@ -125,7 +125,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDh-kC-Lru">
-                                <rect key="frame" x="164.5" y="617" width="46" height="30"/>
+                                <rect key="frame" x="165" y="617" width="46" height="30"/>
                                 <state key="normal" title="やめる"/>
                                 <connections>
                                     <segue destination="cGS-PI-Rai" kind="unwind" unwindAction="backToHomeWithSegue:" id="mKx-8N-IFp"/>
@@ -137,6 +137,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PnK-gK-u6d">
+                                <rect key="frame" x="16" y="207" width="343" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="Eih-kC-f0M"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -145,6 +154,7 @@
                             <constraint firstItem="hRd-GG-DfR" firstAttribute="trailing" secondItem="Thg-4n-WSM" secondAttribute="trailingMargin" id="5cp-lV-17q"/>
                             <constraint firstItem="ESg-0d-NwQ" firstAttribute="top" secondItem="hRd-GG-DfR" secondAttribute="bottom" constant="13" id="BvX-5C-dhF"/>
                             <constraint firstItem="hRd-GG-DfR" firstAttribute="top" secondItem="Kjy-jT-ZDq" secondAttribute="bottom" constant="8" symbolic="YES" id="CtL-kh-yr9"/>
+                            <constraint firstItem="PnK-gK-u6d" firstAttribute="leading" secondItem="ESg-0d-NwQ" secondAttribute="leading" id="Iqk-ig-w1m"/>
                             <constraint firstItem="kqq-mb-09M" firstAttribute="top" secondItem="hRd-GG-DfR" secondAttribute="bottom" constant="8" symbolic="YES" id="KiA-hd-Ldi"/>
                             <constraint firstItem="uDh-kC-Lru" firstAttribute="centerX" secondItem="Thg-4n-WSM" secondAttribute="centerX" id="OEf-et-VBw"/>
                             <constraint firstItem="kqq-mb-09M" firstAttribute="leading" secondItem="Thg-4n-WSM" secondAttribute="leadingMargin" constant="32" id="OoK-sH-Fuj"/>
@@ -157,16 +167,20 @@
                             <constraint firstItem="HXi-Ek-xcT" firstAttribute="top" secondItem="kOv-Co-E9o" secondAttribute="bottom" id="kIf-vE-ba5"/>
                             <constraint firstItem="Kjy-jT-ZDq" firstAttribute="top" secondItem="HXi-Ek-xcT" secondAttribute="bottom" constant="8" symbolic="YES" id="kfg-V6-RtI"/>
                             <constraint firstItem="Kjy-jT-ZDq" firstAttribute="trailing" secondItem="b1q-K6-74M" secondAttribute="trailing" id="kjZ-b2-c8m"/>
+                            <constraint firstItem="PnK-gK-u6d" firstAttribute="trailing" secondItem="hRd-GG-DfR" secondAttribute="trailing" id="m5w-Uz-GUo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ESg-0d-NwQ" secondAttribute="trailing" constant="301" id="nOc-ky-1fU"/>
                             <constraint firstItem="hRd-GG-DfR" firstAttribute="leading" secondItem="8k5-2f-zOA" secondAttribute="leading" id="pzw-xf-XUL"/>
                             <constraint firstItem="gRc-JA-otg" firstAttribute="top" secondItem="uDh-kC-Lru" secondAttribute="bottom" constant="20" id="rUc-28-3DA"/>
+                            <constraint firstItem="PnK-gK-u6d" firstAttribute="top" secondItem="kqq-mb-09M" secondAttribute="bottom" constant="8" symbolic="YES" id="tpR-Av-sA5"/>
                             <constraint firstItem="hRd-GG-DfR" firstAttribute="leading" secondItem="Thg-4n-WSM" secondAttribute="leadingMargin" id="zat-BX-ZAg"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="hiscoreLabel" destination="b1q-K6-74M" id="kCb-xf-qGs"/>
+                        <outlet property="messageLabel" destination="PnK-gK-u6d" id="qY0-8k-hfU"/>
                         <outlet property="questionLabel" destination="hRd-GG-DfR" id="aYH-6h-gaD"/>
                         <outlet property="scoreLabel" destination="HXi-Ek-xcT" id="C5c-S1-JgK"/>
+                        <outlet property="userAnswerTxtField" destination="kqq-mb-09M" id="Kwz-LE-FfF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k41-kp-SFU" userLabel="First Responder" sceneMemberID="firstResponder"/>
