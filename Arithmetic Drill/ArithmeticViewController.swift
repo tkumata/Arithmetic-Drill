@@ -13,7 +13,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     var answer:Int = 0
     var userAnswer:Int = 0
     var timer:Timer!
-    var tmCounter = 11 // 10 + 1, score seed
+    var tmCounter = 11
     var score:Int = 0
     
     @IBOutlet weak var scoreLabel: UILabel!
@@ -23,7 +23,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userAnswerTxtField: UITextField!
     
     @IBAction func nextQuestionButton(_ sender: Any) {
-        tmCounter = 10
+        tmCounter = 11
         userAnswerTxtField.isEnabled = true
         userAnswerTxtField.becomeFirstResponder()
         self.messageLabel.text = ""
@@ -80,7 +80,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
 
         // Do any additional setup after loading the view.
         self.questionLabel.text = ""
-        self.messageLabel.text = ""
+        self.messageLabel.text = "Let's arithmetic."
         self.messageLabel.layer.cornerRadius = 10.0
         self.messageLabel.layer.borderWidth = 1.0
         self.messageLabel.layer.borderColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:1.0).cgColor
@@ -111,7 +111,11 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
                 self.scoreLabel.text = "Score: " + String(score)
             }
         } else {
-            self.messageLabel.text = "Incorrect"
+            if tmCounter == 0 {
+                self.messageLabel.text = "Time up"
+            } else {
+                self.messageLabel.text = "Incorrect\n" + String(answer)
+            }
         }
     }
     
@@ -126,7 +130,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         self.messageLabel.text = String(tmCounter)
         
         if tmCounter == 0 {
-            self.messageLabel.text = "Time up!"
+            userAnswerTxtField.isEnabled = false
             timer.invalidate()
         }
     }
