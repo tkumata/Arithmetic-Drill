@@ -18,11 +18,13 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var userAnswerTxtField: UITextField!
+    
     @IBAction func nextQuestionButton(_ sender: Any) {
         self.userAnswerTxtField.becomeFirstResponder()
+        self.messageLabel.text = ""
 
-        let leftTerm1 = Int(arc4random_uniform(15))
-        let leftTerm2 = Int(arc4random_uniform(15))
+        let leftTerm1 = Int(arc4random_uniform(20)+1)
+        let leftTerm2 = Int(arc4random_uniform(20)+1)
         let kigouNum = Int(arc4random_uniform(3))
         var rightTerm:Int
         var kigou:String = ""
@@ -66,6 +68,9 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         self.questionLabel.text = ""
         self.messageLabel.text = ""
+        self.messageLabel.layer.cornerRadius = 10.0
+        self.messageLabel.layer.borderWidth = 1.0
+        self.messageLabel.layer.borderColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:1.0).cgColor
         userAnswerTxtField.delegate = self
     }
 
@@ -80,9 +85,9 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         userAnswer = (userAnswerText as NSString).integerValue
         
         if (self.answer == userAnswer) {
-            self.messageLabel.text = "せいかい"
+            self.messageLabel.text = "Correct"
         } else {
-            self.messageLabel.text = "ふせいかい"
+            self.messageLabel.text = "Incorrect"
         }
     }
     
