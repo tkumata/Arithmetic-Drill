@@ -12,6 +12,9 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
 
     var answer:Int = 0
     var userAnswer:Int = 0
+    var timer:Timer!
+    var tmCounter = 11 // 10 + 1, score seed
+    var score:Int = 0
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var hiscoreLabel: UILabel!
@@ -20,7 +23,9 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userAnswerTxtField: UITextField!
     
     @IBAction func nextQuestionButton(_ sender: Any) {
-        self.userAnswerTxtField.becomeFirstResponder()
+        tmCounter = 10
+        userAnswerTxtField.isEnabled = true
+        userAnswerTxtField.becomeFirstResponder()
         self.messageLabel.text = ""
 
         let leftTerm1 = Int(arc4random_uniform(20)+1)
@@ -44,7 +49,15 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
             kigou = "+"
         }
         
+        if (timer != nil) {
+            timer.invalidate()
+            timer = nil
+        }
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
+        timer.fire()
+        
         let maskNum = Int(arc4random_uniform(2))
+        
         switch maskNum {
         case 0:
             answer = leftTerm1
@@ -71,6 +84,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         self.messageLabel.layer.cornerRadius = 10.0
         self.messageLabel.layer.borderWidth = 1.0
         self.messageLabel.layer.borderColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:1.0).cgColor
+        
+        // UserDefault
+        
+        // textfield delegate
         userAnswerTxtField.delegate = self
     }
 
@@ -81,11 +98,18 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     
 
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        timer.invalidate()
+        userAnswerTxtField.isEnabled = false
         let userAnswerText = textField.text! as NSString
         userAnswer = (userAnswerText as NSString).integerValue
         
         if (self.answer == userAnswer) {
             self.messageLabel.text = "Correct"
+            
+            if tmCounter > 0 {
+                score += tmCounter
+                self.scoreLabel.text = "Score: " + String(score)
+            }
         } else {
             self.messageLabel.text = "Incorrect"
         }
@@ -94,6 +118,17 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         return false
+    }
+    
+    func update(tm: Timer) {
+        // do something
+        tmCounter -= 1
+        self.messageLabel.text = String(tmCounter)
+        
+        if tmCounter == 0 {
+            self.messageLabel.text = "Time up!"
+            timer.invalidate()
+        }
     }
     
     /*
