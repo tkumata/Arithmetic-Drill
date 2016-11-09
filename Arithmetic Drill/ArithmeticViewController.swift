@@ -10,11 +10,11 @@ import UIKit
 
 class ArithmeticViewController: UIViewController, UITextFieldDelegate {
 
-    var answer:Int = 0
-    var userAnswer:Int = 0
-    var timer:Timer!
+    var answer: Int = 0
+    var userAnswer: Int = 0
+    var timer: Timer!
     var tmCounter = 11
-    var score:Int = 0
+    var score: Int = 0
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var hiscoreLabel: UILabel!
@@ -34,8 +34,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         let leftTerm1 = Int(arc4random_uniform(20)+1)
         let leftTerm2 = Int(arc4random_uniform(20)+1)
         let kigouNum = Int(arc4random_uniform(3))
-        var rightTerm:Int
-        var kigou:String = ""
+        var rightTerm: Int
+        var kigou: String = ""
         // 記号の生成
         switch kigouNum {
         case 0:
@@ -114,7 +114,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         
         if (self.answer == userAnswer) {
             // 正解の場合
-            var bonusMsg:String = ""
+            var bonusMsg: String = ""
             
             if tmCounter > 0 {
                 if tmCounter > 7 {
