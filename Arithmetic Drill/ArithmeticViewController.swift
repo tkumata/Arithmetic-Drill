@@ -57,16 +57,16 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         switch maskNum {
         case 0:
             answer = leftTerm1
-            self.questionLabel.text = "X" + " " + kigou + " " + String(leftTerm2) + " " + "=" + " " + String(rightTerm)
+            self.questionLabel.text = "X " + kigou + " " + String(leftTerm2) + " = " + String(rightTerm)
         case 1:
             answer = leftTerm2
-            self.questionLabel.text = String(leftTerm1) + " " + kigou + " " + "X" + " " + "=" + " " + String(rightTerm)
+            self.questionLabel.text = String(leftTerm1) + " " + kigou + " X" + " = " + String(rightTerm)
         case 2:
             answer = rightTerm
-            self.questionLabel.text = String(leftTerm1) + " " + kigou + " " + String(leftTerm2) + " " + "=" + " " + "X"
+            self.questionLabel.text = String(leftTerm1) + " " + kigou + " " + String(leftTerm2) + " = X"
         default:
             answer = leftTerm2
-            self.questionLabel.text = "X" + " " + kigou + " " + String(leftTerm2) + " " + "=" + " " + String(rightTerm)
+            self.questionLabel.text = "X " + kigou + " " + String(leftTerm2) + " = " + String(rightTerm)
         }
         
         // 既にタイマーが動いていたら止めて初期化
@@ -84,7 +84,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.questionLabel.text = ""
+        self.questionLabel.text = "e.g, X - 12 = 7"
         self.messageLabel.text = "Let's arithmetic."
         self.messageLabel.layer.cornerRadius = 10.0
         self.messageLabel.layer.borderWidth = 1.0
