@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var startButtonOutlet: UIButton!
+    @IBOutlet weak var otherButtonOutlet: UIButton!
     @IBOutlet weak var settingsButtonOutlet: UIButton!
     
     // 各画面から戻るボタン
@@ -23,6 +24,11 @@ class ViewController: UIViewController {
         self.startButtonOutlet.layer.cornerRadius = 10.0
         self.startButtonOutlet.layer.borderWidth = 1.0
         self.startButtonOutlet.layer.borderColor = UIColor(red:0/255, green:122/255, blue:255/255, alpha:1.0).cgColor
+        
+        self.otherButtonOutlet.layer.cornerRadius = 10.0
+        self.otherButtonOutlet.layer.borderWidth = 1.0
+        self.otherButtonOutlet.layer.borderColor = UIColor(red:0/255, green:122/255, blue:255/255, alpha:1.0).cgColor
+        
         self.settingsButtonOutlet.layer.cornerRadius = 10.0
         self.settingsButtonOutlet.layer.borderWidth = 1.0
         self.settingsButtonOutlet.layer.borderColor = UIColor(red:0/255, green:122/255, blue:255/255, alpha:1.0).cgColor

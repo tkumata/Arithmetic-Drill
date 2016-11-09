@@ -16,26 +16,31 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     var tmCounter = 11
     var score: Int = 0
     
+    // Initialize variable from UserDefault.
+
+    // Outlet
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var hiscoreLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var userAnswerTxtField: UITextField!
     
-    // Next Question をタップしたら動作
+    // Action
+    // MARK: When tap Next Question button.
     @IBAction func nextQuestionButton(_ sender: Any) {
-        // 初期化
+        // Initialize
         tmCounter = 11
         userAnswerTxtField.isEnabled = true
         userAnswerTxtField.becomeFirstResponder()
         self.messageLabel.text = ""
-
-        // 問の部品を生成
+        
+        // Make question parts.
         let leftTerm1 = Int(arc4random_uniform(20)+1)
         let leftTerm2 = Int(arc4random_uniform(20)+1)
         let kigouNum = Int(arc4random_uniform(3))
         var rightTerm: Int
         var kigou: String = ""
+        
         // 記号の生成
         switch kigouNum {
         case 0:
@@ -51,9 +56,11 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
             rightTerm = leftTerm1 + leftTerm2
             kigou = "+"
         }
-        // 隠す部分の決定
+        
+        // Decide masking part.
         let maskNum = Int(arc4random_uniform(2))
-        // 最終的な問題の生成と表示
+        
+        // Display question.
         switch maskNum {
         case 0:
             answer = leftTerm1
@@ -69,14 +76,16 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
             self.questionLabel.text = "X " + kigou + " " + String(leftTerm2) + " = " + String(rightTerm)
         }
         
-        // 既にタイマーが動いていたら止めて初期化
+        // Stop and initialize timer when timer moves already.
         if (timer != nil) {
             timer.invalidate()
             timer = nil
         }
-        // タイマー生成
+        
+        // Make timer.
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
-        // タイマー開始
+        
+        // Start timer.
         timer.fire()
     }
     
@@ -101,14 +110,17 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    // 入力終了 = 答え合わせ
+    // MARK: 入力終了 = 答え合わせ
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         // タイマー止める
         timer.invalidate()
+        
         // テキストフィールド無効化
         userAnswerTxtField.isEnabled = false
+        
         // テキストフィールドの値取得
         let userAnswerText = textField.text! as NSString
+        
         // キャスト変換
         userAnswer = (userAnswerText as NSString).integerValue
         
@@ -140,11 +152,13 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // MARK: When tap return key.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         return false
     }
     
+    // MARK: timer update function.
     func update(tm: Timer) {
         tmCounter -= 1
         self.messageLabel.text = String(tmCounter)

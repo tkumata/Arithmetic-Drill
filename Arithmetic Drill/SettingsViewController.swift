@@ -10,10 +10,24 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var myScrollView: UIScrollView!
+    @IBOutlet weak var settingContentsView: UIView!
+    @IBOutlet weak var levelLabel: UILabel!
+    
+    @IBAction func levelStepperAction(_ sender: UIStepper) {
+        let levelNum = Int(sender.value)
+        levelLabel.text = String(levelNum)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // Scroll View Setting
+        let scrollFrame = CGRect(x: 0, y: 64, width: view.frame.width, height: view.frame.height)
+        myScrollView.frame = scrollFrame
+        let contentsRect = settingContentsView.bounds
+        myScrollView.contentSize = CGSize(width: contentsRect.width, height: contentsRect.height)
     }
 
     override func didReceiveMemoryWarning() {
