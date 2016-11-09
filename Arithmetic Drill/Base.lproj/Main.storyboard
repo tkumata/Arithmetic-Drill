@@ -23,16 +23,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kzv-j1-HtR">
-                                <rect key="frame" x="16" y="333" width="343" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="d4l-vs-7fb"/>
-                                </constraints>
-                                <state key="normal" title="Start"/>
-                                <connections>
-                                    <segue destination="BJa-tt-bnU" kind="show" id="I7b-43-ELj"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arithmetic Drill" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BXD-Ig-WQc">
                                 <rect key="frame" x="90" y="167" width="195" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -42,7 +32,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GiF-Ns-K1x">
                                 <rect key="frame" x="16" y="587" width="343" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="uE1-fH-4u5"/>
+                                    <constraint firstAttribute="height" constant="60" id="10y-OF-Kuz"/>
                                 </constraints>
                                 <state key="normal" title="Settings"/>
                                 <connections>
@@ -50,30 +40,40 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RkB-v2-1gn">
-                                <rect key="frame" x="16" y="401" width="343" height="60"/>
+                                <rect key="frame" x="16" y="519" width="343" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="niN-M3-Tz5"/>
+                                    <constraint firstAttribute="height" constant="60" id="w3Z-ut-dB5"/>
                                 </constraints>
                                 <state key="normal" title="Other"/>
                                 <connections>
                                     <segue destination="eXX-FS-frq" kind="show" id="vmw-bJ-WhK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kzv-j1-HtR">
+                                <rect key="frame" x="16" y="451" width="343" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="3tL-f5-3KE"/>
+                                </constraints>
+                                <state key="normal" title="Start"/>
+                                <connections>
+                                    <segue destination="BJa-tt-bnU" kind="show" id="I7b-43-ELj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="BXD-Ig-WQc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="103" id="9P9-4K-jOe"/>
-                            <constraint firstItem="Kzv-j1-HtR" firstAttribute="leading" secondItem="RkB-v2-1gn" secondAttribute="leading" id="Bsr-rN-Qb2"/>
-                            <constraint firstItem="RkB-v2-1gn" firstAttribute="top" secondItem="Kzv-j1-HtR" secondAttribute="bottom" constant="8" symbolic="YES" id="IL3-J4-H4i"/>
-                            <constraint firstItem="Kzv-j1-HtR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NSG-ra-lxj"/>
-                            <constraint firstItem="BXD-Ig-WQc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="74" id="Uln-2F-Acl"/>
-                            <constraint firstItem="Kzv-j1-HtR" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="333" id="Yp0-1b-dFU"/>
-                            <constraint firstItem="Kzv-j1-HtR" firstAttribute="trailing" secondItem="RkB-v2-1gn" secondAttribute="trailing" id="ZRE-uz-y91"/>
-                            <constraint firstItem="RkB-v2-1gn" firstAttribute="leading" secondItem="GiF-Ns-K1x" secondAttribute="leading" id="amc-Zt-JAA"/>
-                            <constraint firstAttribute="bottom" secondItem="GiF-Ns-K1x" secondAttribute="bottom" constant="20" symbolic="YES" id="feg-S2-q7l"/>
-                            <constraint firstItem="Kzv-j1-HtR" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="jrS-Wt-I2s"/>
-                            <constraint firstItem="BXD-Ig-WQc" firstAttribute="centerX" secondItem="Kzv-j1-HtR" secondAttribute="centerX" id="qi7-Qf-HSP"/>
-                            <constraint firstItem="RkB-v2-1gn" firstAttribute="trailing" secondItem="GiF-Ns-K1x" secondAttribute="trailing" id="ruh-SG-7Uz"/>
+                            <constraint firstAttribute="bottom" secondItem="GiF-Ns-K1x" secondAttribute="bottom" constant="20" symbolic="YES" id="0cq-Wr-gOl"/>
+                            <constraint firstItem="RkB-v2-1gn" firstAttribute="leading" secondItem="GiF-Ns-K1x" secondAttribute="leading" id="A9w-zE-gyH"/>
+                            <constraint firstItem="RkB-v2-1gn" firstAttribute="top" secondItem="Kzv-j1-HtR" secondAttribute="bottom" constant="8" symbolic="YES" id="ODG-7q-Vrx"/>
+                            <constraint firstItem="BXD-Ig-WQc" firstAttribute="centerX" secondItem="Kzv-j1-HtR" secondAttribute="centerX" id="PX8-8B-f9L"/>
+                            <constraint firstItem="BXD-Ig-WQc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="74" id="V8W-ZL-w3W"/>
+                            <constraint firstItem="Kzv-j1-HtR" firstAttribute="leading" secondItem="RkB-v2-1gn" secondAttribute="leading" id="dMR-k6-2BK"/>
+                            <constraint firstItem="Kzv-j1-HtR" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="foB-d7-aDR"/>
+                            <constraint firstItem="Kzv-j1-HtR" firstAttribute="trailing" secondItem="RkB-v2-1gn" secondAttribute="trailing" id="hao-LZ-fAp"/>
+                            <constraint firstItem="RkB-v2-1gn" firstAttribute="trailing" secondItem="GiF-Ns-K1x" secondAttribute="trailing" id="jJj-VU-D9i"/>
+                            <constraint firstItem="GiF-Ns-K1x" firstAttribute="top" secondItem="RkB-v2-1gn" secondAttribute="bottom" constant="8" symbolic="YES" id="k6h-Ul-PNd"/>
+                            <constraint firstItem="Kzv-j1-HtR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="rWz-c5-bPE"/>
+                            <constraint firstItem="BXD-Ig-WQc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="103" id="zXi-WM-LFU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Menu" id="6Rt-ZP-PK0"/>
