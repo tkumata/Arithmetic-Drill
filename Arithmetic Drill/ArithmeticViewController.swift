@@ -22,18 +22,21 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var userAnswerTxtField: UITextField!
     
+    // Next Question をタップしたら動作
     @IBAction func nextQuestionButton(_ sender: Any) {
+        // 初期化
         tmCounter = 11
         userAnswerTxtField.isEnabled = true
         userAnswerTxtField.becomeFirstResponder()
         self.messageLabel.text = ""
 
+        // 問の部品を生成
         let leftTerm1 = Int(arc4random_uniform(20)+1)
         let leftTerm2 = Int(arc4random_uniform(20)+1)
         let kigouNum = Int(arc4random_uniform(3))
         var rightTerm:Int
         var kigou:String = ""
-        
+        // 記号の生成
         switch kigouNum {
         case 0:
             rightTerm = leftTerm1 + leftTerm2
@@ -48,16 +51,9 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
             rightTerm = leftTerm1 + leftTerm2
             kigou = "+"
         }
-        
-        if (timer != nil) {
-            timer.invalidate()
-            timer = nil
-        }
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
-        timer.fire()
-        
+        // 隠す部分の決定
         let maskNum = Int(arc4random_uniform(2))
-        
+        // 最終的な問題の生成と表示
         switch maskNum {
         case 0:
             answer = leftTerm1
@@ -73,6 +69,15 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
             self.questionLabel.text = "X" + " " + kigou + " " + String(leftTerm2) + " " + "=" + " " + String(rightTerm)
         }
         
+        // 既にタイマーが動いていたら止めて初期化
+        if (timer != nil) {
+            timer.invalidate()
+            timer = nil
+        }
+        // タイマー生成
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
+        // タイマー開始
+        timer.fire()
     }
     
     override func viewDidLoad() {
@@ -96,21 +101,37 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
+    // 入力終了 = 答え合わせ
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        // タイマー止める
         timer.invalidate()
+        // テキストフィールド無効化
         userAnswerTxtField.isEnabled = false
+        // テキストフィールドの値取得
         let userAnswerText = textField.text! as NSString
+        // キャスト変換
         userAnswer = (userAnswerText as NSString).integerValue
         
         if (self.answer == userAnswer) {
-            self.messageLabel.text = "Correct"
+            // 正解の場合
+            var bonusMsg:String = ""
             
             if tmCounter > 0 {
-                score += tmCounter
+                if tmCounter > 7 {
+                    // 残り時間によるボーナス
+                    score += tmCounter + 10
+                    bonusMsg = " and bounus point!!!"
+                } else {
+                    // 通常の正解
+                    score += tmCounter
+                    bonusMsg = ""
+                }
                 self.scoreLabel.text = "Score: " + String(score)
             }
+            
+            self.messageLabel.text = "Correct" + bonusMsg
         } else {
+            // 不正解、タイムアップの場合
             if tmCounter == 0 {
                 self.messageLabel.text = "Time up"
             } else {
@@ -125,7 +146,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     }
     
     func update(tm: Timer) {
-        // do something
         tmCounter -= 1
         self.messageLabel.text = String(tmCounter)
         
