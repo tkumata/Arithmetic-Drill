@@ -24,7 +24,7 @@ class SettingsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         // Scroll View Setting
-        let scrollFrame = CGRect(x: 0, y: 64, width: view.frame.width, height: view.frame.height)
+        let scrollFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         myScrollView.frame = scrollFrame
         let contentsRect = settingContentsView.bounds
         myScrollView.contentSize = CGSize(width: contentsRect.width, height: contentsRect.height)

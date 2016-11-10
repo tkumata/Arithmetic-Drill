@@ -33,6 +33,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         userAnswerTxtField.isEnabled = true
         userAnswerTxtField.becomeFirstResponder()
         self.messageLabel.text = ""
+        var questionString:String = ""
         
         // Make question parts.
         let leftTerm1 = Int(arc4random_uniform(20)+1)
@@ -64,17 +65,18 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         switch maskNum {
         case 0:
             answer = leftTerm1
-            self.questionLabel.text = "X " + kigou + " " + String(leftTerm2) + " = " + String(rightTerm)
+            questionString = "X " + kigou + " " + String(leftTerm2) + " = " + String(rightTerm)
         case 1:
             answer = leftTerm2
-            self.questionLabel.text = String(leftTerm1) + " " + kigou + " X" + " = " + String(rightTerm)
+            questionString = String(leftTerm1) + " " + kigou + " X" + " = " + String(rightTerm)
         case 2:
             answer = rightTerm
-            self.questionLabel.text = String(leftTerm1) + " " + kigou + " " + String(leftTerm2) + " = X"
+            questionString = String(leftTerm1) + " " + kigou + " " + String(leftTerm2) + " = X"
         default:
             answer = leftTerm2
-            self.questionLabel.text = "X " + kigou + " " + String(leftTerm2) + " = " + String(rightTerm)
+            questionString = "X " + kigou + " " + String(leftTerm2) + " = " + String(rightTerm)
         }
+        self.questionLabel.text = questionString
         
         // Stop and initialize timer when timer moves already.
         if (timer != nil) {
