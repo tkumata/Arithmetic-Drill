@@ -14,7 +14,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     var userAnswer: Int = 0
     var timer: Timer!
     var tmCounter = 11
+    
     var score: Int = 0
+    var hiscore: Int = 0
+    
     var questionOfNumber: Int = 0
     var questionOfCorrect: Int = 0
     var questionOfIncorrect: Int = 0
@@ -25,12 +28,18 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     var burstModeFromUD: Bool = false
     var disable10FromUD: Bool = false
     
+    // 後で消す
+    var lastQNum: Int = 0
+    var lastQCorre: Int = 0
+    var lastQScore: Int = 0
+    
     // Outlet
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var hiscoreLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var userAnswerTxtField: UITextField!
+    @IBOutlet weak var lastData: UILabel!
     
     // Action
     // MARK: When tap Next Question button.
@@ -157,11 +166,28 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         // Read UserDefault
         let defaults = UserDefaults.standard
         levelFromUD = defaults.integer(forKey: "LEVEL")
-//        burstModeFromUD = defaults.bool(forKey: "BURSTMODE")
+        burstModeFromUD = defaults.bool(forKey: "BURSTMODE")
         disable10FromUD = defaults.bool(forKey: "DISABLE10")
+        hiscore = defaults.integer(forKey: "HISCORE")
         
-        // textfield delegate
+        // 後で消す変数 BEGIN
+        lastQNum = defaults.integer(forKey: "QNUM")
+        lastQCorre = defaults.integer(forKey: "CORRECTNUM")
+        lastQScore = defaults.integer(forKey: "SCORE")
+        lastData.text = "Your last data\n" +
+            "Score: " + String(lastQScore) +
+            "\nQuestion: " + String(lastQNum) +
+            "\nCorrect: " + String(lastQCorre)
+        // 後で消す変数 END
+        
+        // Restore hiscore.
+        hiscoreLabel.text = "HiScore: " + String(hiscore)
+        
+        // textfield delegate.
         userAnswerTxtField.delegate = self
+        
+        // textfield unavailable when starting.
+        userAnswerTxtField.isEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -216,11 +242,26 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         }
         
         // Overwrite score with accuracy rate
-        accuracyRate = Double(questionOfCorrect * 100 / questionOfNumber)
-        self.scoreLabel.text = "Score: " + String(score) + "(" + String(accuracyRate) + "%)"
+        if questionOfCorrect > 0, questionOfNumber > 0 {
+            accuracyRate = Double(questionOfCorrect * 100 / questionOfNumber)
+            scoreLabel.text = "Score: " + String(score) + "(" + String(accuracyRate) + "%)"
+        }
         
         // Save result to User Default
+        let defaults = UserDefaults.standard
+        defaults.set(score, forKey: "SCORE")
+        defaults.set(questionOfNumber, forKey: "QNUM")
+        defaults.set(questionOfCorrect, forKey: "CORRECTNUM")
         
+        if score > hiscore {
+            hiscore = score
+            hiscoreLabel.text = "HiScore: " + String(hiscore)
+            defaults.set(hiscore, forKey: "HISCORE")
+        }
+        
+        if burstModeFromUD {
+            nextQuestionButton(Any.self)
+        }
     }
     
     // MARK: When tap return key.
@@ -239,6 +280,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
             if (timer != nil) {
                 timer.invalidate()
                 timer = nil
+            }
+            
+            if burstModeFromUD {
+                nextQuestionButton(Any.self)
             }
         }
     }
