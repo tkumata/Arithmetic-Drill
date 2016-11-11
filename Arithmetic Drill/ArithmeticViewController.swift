@@ -21,7 +21,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     var accuracyRate: Double = 0.0
     
     // Initialize variable from UserDefault.
-
+    var levelFromUD: Int = 5
+    var burstModeFromUD: Bool = false
+    var disable10FromUD: Bool = false
+    
     // Outlet
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var hiscoreLabel: UILabel!
@@ -33,15 +36,54 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     // MARK: When tap Next Question button.
     @IBAction func nextQuestionButton(_ sender: Any) {
         // Initialize
-        tmCounter = 11
+        if disable10FromUD == false {
+            tmCounter = 11
+        } else {
+            tmCounter = 1
+        }
         userAnswerTxtField.isEnabled = true
         userAnswerTxtField.becomeFirstResponder()
         self.messageLabel.text = ""
         var questionString: String = ""
         
         // Make question parts.
-        let leftTerm1 = Int(arc4random_uniform(20)+1)
-        let leftTerm2 = Int(arc4random_uniform(20)+1)
+        var leftTerm1 = 0
+        var leftTerm2 = 0
+        switch levelFromUD {
+        case 1:
+            leftTerm1 = Int(arc4random_uniform(9)+1)
+            leftTerm2 = Int(arc4random_uniform(9)+1)
+        case 2:
+            leftTerm1 = Int(arc4random_uniform(11)+1)
+            leftTerm2 = Int(arc4random_uniform(11)+1)
+        case 3:
+            leftTerm1 = Int(arc4random_uniform(13)+1)
+            leftTerm2 = Int(arc4random_uniform(13)+1)
+        case 4:
+            leftTerm1 = Int(arc4random_uniform(15)+1)
+            leftTerm2 = Int(arc4random_uniform(15)+1)
+        case 5:
+            leftTerm1 = Int(arc4random_uniform(20)+1)
+            leftTerm2 = Int(arc4random_uniform(20)+1)
+        case 6:
+            leftTerm1 = Int(arc4random_uniform(25)+1)
+            leftTerm2 = Int(arc4random_uniform(25)+1)
+        case 7:
+            leftTerm1 = Int(arc4random_uniform(30)+1)
+            leftTerm2 = Int(arc4random_uniform(30)+1)
+        case 8:
+            leftTerm1 = Int(arc4random_uniform(35)+1)
+            leftTerm2 = Int(arc4random_uniform(35)+1)
+        case 9:
+            leftTerm1 = Int(arc4random_uniform(40)+1)
+            leftTerm2 = Int(arc4random_uniform(40)+1)
+        case 10:
+            leftTerm1 = Int(arc4random_uniform(45)+1)
+            leftTerm2 = Int(arc4random_uniform(45)+1)
+        default:
+            leftTerm1 = Int(arc4random_uniform(50)+1)
+            leftTerm2 = Int(arc4random_uniform(50)+1)
+        }
         let kigouNum = Int(arc4random_uniform(3))
         var rightTerm: Int = 0
         var kigou: String = ""
@@ -90,14 +132,16 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         }
         
         // Make timer.
-        timer = Timer.scheduledTimer(timeInterval: 1.0,
-                                     target: self,
-                                     selector: #selector(self.update),
-                                     userInfo: nil,
-                                     repeats: true)
-        
-        // Start timer.
-        timer.fire()
+        if disable10FromUD == false {
+            timer = Timer.scheduledTimer(timeInterval: 1.0,
+                                         target: self,
+                                         selector: #selector(self.update),
+                                         userInfo: nil,
+                                         repeats: true)
+            
+            // Start timer.
+            timer.fire()
+        }
     }
     
     override func viewDidLoad() {
@@ -111,6 +155,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         self.messageLabel.layer.borderColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:1.0).cgColor
         
         // Read UserDefault
+        let defaults = UserDefaults.standard
+        levelFromUD = defaults.integer(forKey: "LEVEL")
+//        burstModeFromUD = defaults.bool(forKey: "BURSTMODE")
+        disable10FromUD = defaults.bool(forKey: "DISABLE10")
         
         // textfield delegate
         userAnswerTxtField.delegate = self
@@ -124,7 +172,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     // MARK: 入力終了 = 答え合わせ
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         // タイマー止める
-        timer.invalidate()
+        if (timer != nil) {
+            timer.invalidate()
+            timer = nil
+        }
         
         // テキストフィールド無効化
         userAnswerTxtField.isEnabled = false
@@ -185,7 +236,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         
         if tmCounter == 0 {
             userAnswerTxtField.isEnabled = false
-            timer.invalidate()
+            if (timer != nil) {
+                timer.invalidate()
+                timer = nil
+            }
         }
     }
     
