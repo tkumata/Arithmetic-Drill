@@ -15,6 +15,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     var timer: Timer!
     var tmCounter = 11
     var score: Int = 0
+    var questionOfNumber: Int = 0
+    var questionOfCorrect: Int = 0
+    var questionOfIncorrect: Int = 0
+    var accuracyRate: Double = 0.0
     
     // Initialize variable from UserDefault.
 
@@ -33,13 +37,13 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         userAnswerTxtField.isEnabled = true
         userAnswerTxtField.becomeFirstResponder()
         self.messageLabel.text = ""
-        var questionString:String = ""
+        var questionString: String = ""
         
         // Make question parts.
         let leftTerm1 = Int(arc4random_uniform(20)+1)
         let leftTerm2 = Int(arc4random_uniform(20)+1)
         let kigouNum = Int(arc4random_uniform(3))
-        var rightTerm: Int
+        var rightTerm: Int = 0
         var kigou: String = ""
         
         // 記号の生成
@@ -77,6 +81,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
             questionString = "X " + kigou + " " + String(leftTerm2) + " = " + String(rightTerm)
         }
         self.questionLabel.text = questionString
+        questionOfNumber += 1
         
         // Stop and initialize timer when timer moves already.
         if (timer != nil) {
@@ -85,7 +90,11 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         }
         
         // Make timer.
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.0,
+                                     target: self,
+                                     selector: #selector(self.update),
+                                     userInfo: nil,
+                                     repeats: true)
         
         // Start timer.
         timer.fire()
@@ -101,7 +110,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         self.messageLabel.layer.borderWidth = 1.0
         self.messageLabel.layer.borderColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:1.0).cgColor
         
-        // UserDefault
+        // Read UserDefault
         
         // textfield delegate
         userAnswerTxtField.delegate = self
@@ -127,31 +136,40 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         userAnswer = (userAnswerText as NSString).integerValue
         
         if (self.answer == userAnswer) {
-            // 正解の場合
+            // Correct
             var bonusMsg: String = ""
+            questionOfCorrect += 1
             
             if tmCounter > 0 {
                 if tmCounter > 7 {
-                    // 残り時間によるボーナス
+                    // Bonus point
                     score += tmCounter + 10
-                    bonusMsg = " and bounus point!!!"
+                    bonusMsg = " and bounus point"
                 } else {
-                    // 通常の正解
+                    // Normal
                     score += tmCounter
                     bonusMsg = ""
                 }
-                self.scoreLabel.text = "Score: " + String(score)
             }
             
             self.messageLabel.text = "Correct" + bonusMsg
         } else {
-            // 不正解、タイムアップの場合
+            // Incorrect
+            questionOfIncorrect += 1
+            
             if tmCounter == 0 {
                 self.messageLabel.text = "Time up"
             } else {
                 self.messageLabel.text = "Incorrect\n" + String(answer)
             }
         }
+        
+        // Overwrite score with accuracy rate
+        accuracyRate = Double(questionOfCorrect * 100 / questionOfNumber)
+        self.scoreLabel.text = "Score: " + String(score) + "(" + String(accuracyRate) + "%)"
+        
+        // Save result to User Default
+        
     }
     
     // MARK: When tap return key.
