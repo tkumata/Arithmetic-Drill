@@ -48,6 +48,7 @@
 				8965BC3E1DD022EA00E20CAE /* Arithmetic Drill */,
 				8965BC3D1DD022EA00E20CAE /* Products */,
 				89CA47A91DD6A5CA004D31F6 /* README.md */,
+				89CA47AB1DD6A7C4004D31F6 /* imgs */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +74,14 @@
 				8965BC461DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodeld */,
 			);
 			path = "Arithmetic Drill";
+			sourceTree = "<group>";
+		};
+		89CA47AB1DD6A7C4004D31F6 /* imgs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = imgs;
+			path = "Arithmetic Drill/imgs";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

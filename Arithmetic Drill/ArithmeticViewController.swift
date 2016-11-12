@@ -142,7 +142,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         }
         
         self.questionLabel.text = questionString
-        questionOfNumber += 1
         
         // Make timer.
         if disable10FromUD == false {
@@ -211,6 +210,12 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         burstModeFromUD = false
         userAnswerTxtField.isEnabled = false
         userAnswerTxtField.resignFirstResponder()
+        
+        if burstModeFromUD && questionOfNumber > 1 {
+            questionOfNumber -= 1
+            let defaults = UserDefaults.standard
+            defaults.set(questionOfNumber, forKey: "QNUM")
+        }
     }
     
     // MARK: 入力終了 = 答え合わせ
@@ -220,6 +225,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
             timer.invalidate()
             timer = nil
         }
+        
+        questionOfNumber += 1
         
         // Unavailable textfield.
         userAnswerTxtField.isEnabled = false
