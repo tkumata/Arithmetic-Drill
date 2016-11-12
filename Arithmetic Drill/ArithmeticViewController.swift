@@ -44,15 +44,22 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     // Action
     // MARK: When tap Next Question button.
     @IBAction func nextQuestionButton(_ sender: Any) {
+        // Stop and initialize timer when timer moves already.
+        if (timer != nil) {
+            timer.invalidate()
+            timer = nil
+        }
+        
         // Initialize
         if disable10FromUD == false {
             tmCounter = 11
         } else {
             tmCounter = 1
         }
+        
         userAnswerTxtField.isEnabled = true
         userAnswerTxtField.becomeFirstResponder()
-        self.messageLabel.text = ""
+        messageLabel.text = ""
         var questionString: String = ""
         
         // Make question parts.
@@ -134,12 +141,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         self.questionLabel.text = questionString
         questionOfNumber += 1
         
-        // Stop and initialize timer when timer moves already.
-        if (timer != nil) {
-            timer.invalidate()
-            timer = nil
-        }
-        
         // Make timer.
         if disable10FromUD == false {
             timer = Timer.scheduledTimer(timeInterval: 1.0,
@@ -170,15 +171,16 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         disable10FromUD = defaults.bool(forKey: "DISABLE10")
         hiscore = defaults.integer(forKey: "HISCORE")
         
-        // 後で消す変数 BEGIN
+        // 後で消す BEGIN
         lastQNum = defaults.integer(forKey: "QNUM")
         lastQCorre = defaults.integer(forKey: "CORRECTNUM")
         lastQScore = defaults.integer(forKey: "SCORE")
-        lastData.text = "Your last data\n" +
+        lastData.text = "Your last data.\n" +
             "Score: " + String(lastQScore) +
             "\nQuestion: " + String(lastQNum) +
-            "\nCorrect: " + String(lastQCorre)
-        // 後で消す変数 END
+            "\nCorrect: " + String(lastQCorre) +
+            "\nLevel: " + String(levelFromUD)
+        // 後で消す END
         
         // Restore hiscore.
         hiscoreLabel.text = "HiScore: " + String(hiscore)
@@ -194,80 +196,98 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    // MARK: 入力終了 = 答え合わせ
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-        // タイマー止める
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Stop timer.
         if (timer != nil) {
             timer.invalidate()
             timer = nil
         }
         
-        // テキストフィールド無効化
+        burstModeFromUD = false
         userAnswerTxtField.isEnabled = false
+        userAnswerTxtField.resignFirstResponder()
+    }
+    
+    // MARK: 入力終了 = 答え合わせ
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        // Stop timer.
+        if (timer != nil) {
+            timer.invalidate()
+            timer = nil
+        }
         
-        // テキストフィールドの値取得
+        // Unavailable textfield.
+        userAnswerTxtField.isEnabled = false
+        userAnswerTxtField.resignFirstResponder()
+        
+        // Get textfield value.
         let userAnswerText = textField.text! as NSString
         
-        // キャスト変換
+        // Convert cast.
         userAnswer = (userAnswerText as NSString).integerValue
         
+        var messTmp: String = ""
         if (self.answer == userAnswer) {
             // Correct
-            var bonusMsg: String = ""
             questionOfCorrect += 1
             
             if tmCounter > 0 {
-                if tmCounter > 7 {
-                    // Bonus point
-                    score += tmCounter + 10
-                    bonusMsg = " and bounus point"
-                } else {
-                    // Normal
-                    score += tmCounter
-                    bonusMsg = ""
-                }
+                score += tmCounter
+                messTmp = "Correct"
             }
             
-            self.messageLabel.text = "Correct" + bonusMsg
+            // Bonus point
+            if tmCounter > 7 {
+                score += 10
+                messTmp += " and bounus point"
+            }
         } else {
             // Incorrect
             questionOfIncorrect += 1
             
             if tmCounter == 0 {
-                self.messageLabel.text = "Time up"
+                messTmp = "Time up"
             } else {
-                self.messageLabel.text = "Incorrect\n" + String(answer)
+                messTmp = "Incorrect\n" + String(answer)
             }
         }
         
+        messageLabel.text = messTmp
+        
         // Overwrite score with accuracy rate
-        if questionOfCorrect > 0, questionOfNumber > 0 {
+        if questionOfCorrect > 0 && questionOfNumber > 0 {
             accuracyRate = Double(questionOfCorrect * 100 / questionOfNumber)
             scoreLabel.text = "Score: " + String(score) + "(" + String(accuracyRate) + "%)"
+            
+            // Save result to User Default.
+            let defaults = UserDefaults.standard
+            defaults.set(score, forKey: "SCORE")
+            defaults.set(questionOfNumber, forKey: "QNUM")
+            defaults.set(questionOfCorrect, forKey: "CORRECTNUM")
+
+            // Update hiscore.
+            if score > hiscore {
+                hiscore = score
+                hiscoreLabel.text = "HiScore: " + String(hiscore)
+                defaults.set(hiscore, forKey: "HISCORE")
+            }
         }
         
-        // Save result to User Default
-        let defaults = UserDefaults.standard
-        defaults.set(score, forKey: "SCORE")
-        defaults.set(questionOfNumber, forKey: "QNUM")
-        defaults.set(questionOfCorrect, forKey: "CORRECTNUM")
-        
-        if score > hiscore {
-            hiscore = score
-            hiscoreLabel.text = "HiScore: " + String(hiscore)
-            defaults.set(hiscore, forKey: "HISCORE")
-        }
-        
+        // Burst mode
         if burstModeFromUD {
-            nextQuestionButton(Any.self)
+            nextQuestionButton(self)
         }
     }
     
     // MARK: When tap return key.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
-        return false
+//        view.endEditing(true)
+//        return false
+        userAnswerTxtField.resignFirstResponder()
+        return true
     }
     
     // MARK: timer update function.
@@ -276,15 +296,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         self.messageLabel.text = String(tmCounter)
         
         if tmCounter == 0 {
-            userAnswerTxtField.isEnabled = false
-            if (timer != nil) {
-                timer.invalidate()
-                timer = nil
-            }
-            
-            if burstModeFromUD {
-                nextQuestionButton(Any.self)
-            }
+            view.endEditing(true)
         }
     }
     

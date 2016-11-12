@@ -167,10 +167,10 @@
                                     <action selector="nextQuestionButton:" destination="BJa-tt-bnU" eventType="touchUpInside" id="qIw-hI-R0F"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lastData" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r77-ra-BcV">
-                                <rect key="frame" x="16" y="336" width="343" height="80"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lastData" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r77-ra-BcV">
+                                <rect key="frame" x="16" y="336" width="343" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="UTr-Gp-NcS"/>
+                                    <constraint firstAttribute="height" constant="100" id="UTr-Gp-NcS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
