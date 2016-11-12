@@ -13,7 +13,6 @@
 		8965BC481DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8965BC461DD022EB00E20CAE /* Arithmetic_Drill.xcdatamodeld */; };
 		8965BC4A1DD022EB00E20CAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8965BC491DD022EB00E20CAE /* Assets.xcassets */; };
 		8965BC4D1DD022EB00E20CAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8965BC4B1DD022EB00E20CAE /* LaunchScreen.storyboard */; };
-		89CA47AA1DD6A5CA004D31F6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 89CA47A91DD6A5CA004D31F6 /* README.md */; };
 		89CB521F1DD04AAC00DEBD89 /* ArithmeticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CB521E1DD04AAC00DEBD89 /* ArithmeticViewController.swift */; };
 		89EE87431DD05ACB0006F632 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE87421DD05ACB0006F632 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -149,7 +148,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89CA47AA1DD6A5CA004D31F6 /* README.md in Sources */,
 				8965BC421DD022EB00E20CAE /* ViewController.swift in Sources */,
 				8965BC401DD022EB00E20CAE /* AppDelegate.swift in Sources */,
 				89CB521F1DD04AAC00DEBD89 /* ArithmeticViewController.swift in Sources */,
