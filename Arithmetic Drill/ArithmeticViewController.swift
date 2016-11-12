@@ -28,7 +28,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     var burstModeFromUD: Bool = false
     var disable10FromUD: Bool = false
     
-    // 後で消す
+    // TODO: Delete
     var lastQNum: Int = 0
     var lastQCorre: Int = 0
     var lastQScore: Int = 0
@@ -39,6 +39,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var userAnswerTxtField: UITextField!
+    // TODO: Delete
     @IBOutlet weak var lastData: UILabel!
     
     // Action
@@ -65,6 +66,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         // Make question parts.
         var leftTerm1 = 0
         var leftTerm2 = 0
+        
         switch levelFromUD {
         case 1:
             leftTerm1 = Int(arc4random_uniform(9)+1)
@@ -138,6 +140,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
             answer = leftTerm2
             questionString = "X " + kigou + " " + String(leftTerm2) + " = " + String(rightTerm)
         }
+        
         self.questionLabel.text = questionString
         questionOfNumber += 1
         
@@ -171,7 +174,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         disable10FromUD = defaults.bool(forKey: "DISABLE10")
         hiscore = defaults.integer(forKey: "HISCORE")
         
-        // 後で消す BEGIN
+        // TODO: Delete
         lastQNum = defaults.integer(forKey: "QNUM")
         lastQCorre = defaults.integer(forKey: "CORRECTNUM")
         lastQScore = defaults.integer(forKey: "SCORE")
@@ -180,7 +183,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
             "\nQuestion: " + String(lastQNum) +
             "\nCorrect: " + String(lastQCorre) +
             "\nLevel: " + String(levelFromUD)
-        // 後で消す END
         
         // Restore hiscore.
         hiscoreLabel.text = "HiScore: " + String(hiscore)
@@ -229,6 +231,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         // Convert cast.
         userAnswer = (userAnswerText as NSString).integerValue
         
+        // MARK: Check answer.
         var messTmp: String = ""
         if (self.answer == userAnswer) {
             // Correct
@@ -259,16 +262,17 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         
         // Overwrite score with accuracy rate
         if questionOfCorrect > 0 && questionOfNumber > 0 {
+            // MARK: Update score.
             accuracyRate = Double(questionOfCorrect * 100 / questionOfNumber)
             scoreLabel.text = "Score: " + String(score) + "(" + String(accuracyRate) + "%)"
             
-            // Save result to User Default.
+            // MARK: Save result to User Default.
             let defaults = UserDefaults.standard
             defaults.set(score, forKey: "SCORE")
             defaults.set(questionOfNumber, forKey: "QNUM")
             defaults.set(questionOfCorrect, forKey: "CORRECTNUM")
 
-            // Update hiscore.
+            // MARK: Update hiscore.
             if score > hiscore {
                 hiscore = score
                 hiscoreLabel.text = "HiScore: " + String(hiscore)
