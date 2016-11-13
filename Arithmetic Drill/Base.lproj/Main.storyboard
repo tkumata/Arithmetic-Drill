@@ -167,15 +167,6 @@
                                     <action selector="nextQuestionButton:" destination="BJa-tt-bnU" eventType="touchUpInside" id="qIw-hI-R0F"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lastData" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r77-ra-BcV">
-                                <rect key="frame" x="16" y="336" width="343" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="UTr-Gp-NcS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -186,12 +177,10 @@
                             <constraint firstItem="HXi-Ek-xcT" firstAttribute="firstBaseline" secondItem="b1q-K6-74M" secondAttribute="firstBaseline" id="ChW-vH-62K"/>
                             <constraint firstItem="b1q-K6-74M" firstAttribute="leading" secondItem="HXi-Ek-xcT" secondAttribute="trailing" constant="23" id="E2R-xr-Y5q"/>
                             <constraint firstItem="HXi-Ek-xcT" firstAttribute="leading" secondItem="Thg-4n-WSM" secondAttribute="leadingMargin" id="E75-lw-EN8"/>
-                            <constraint firstItem="r77-ra-BcV" firstAttribute="trailing" secondItem="PnK-gK-u6d" secondAttribute="trailing" id="F60-Uf-1lU"/>
                             <constraint firstAttribute="bottom" secondItem="8k5-2f-zOA" secondAttribute="bottom" constant="20" symbolic="YES" id="JEd-cy-oY4"/>
                             <constraint firstItem="kqq-mb-09M" firstAttribute="top" secondItem="Kjy-jT-ZDq" secondAttribute="bottom" constant="67" id="LEB-7O-75D"/>
                             <constraint firstItem="HXi-Ek-xcT" firstAttribute="top" secondItem="kOv-Co-E9o" secondAttribute="bottom" id="Pgg-5u-Cgw"/>
                             <constraint firstItem="b1q-K6-74M" firstAttribute="trailing" secondItem="hRd-GG-DfR" secondAttribute="trailing" id="UpT-7I-Af6"/>
-                            <constraint firstItem="r77-ra-BcV" firstAttribute="top" secondItem="PnK-gK-u6d" secondAttribute="bottom" constant="8" symbolic="YES" id="WDt-4M-c2f"/>
                             <constraint firstItem="hRd-GG-DfR" firstAttribute="trailing" secondItem="PnK-gK-u6d" secondAttribute="trailing" id="Zfo-Qs-Y5Q"/>
                             <constraint firstItem="kqq-mb-09M" firstAttribute="leading" secondItem="Thg-4n-WSM" secondAttribute="leadingMargin" constant="32" id="cNT-Gd-bH7"/>
                             <constraint firstItem="hRd-GG-DfR" firstAttribute="leading" secondItem="ESg-0d-NwQ" secondAttribute="leading" id="dzk-j7-T1O"/>
@@ -204,13 +193,11 @@
                             <constraint firstItem="Kjy-jT-ZDq" firstAttribute="centerX" secondItem="hRd-GG-DfR" secondAttribute="centerX" id="seB-Tu-jnA"/>
                             <constraint firstItem="ESg-0d-NwQ" firstAttribute="leading" secondItem="PnK-gK-u6d" secondAttribute="leading" id="tGp-YC-sXF"/>
                             <constraint firstItem="PnK-gK-u6d" firstAttribute="top" secondItem="kqq-mb-09M" secondAttribute="bottom" constant="8" symbolic="YES" id="vNW-eY-MYz"/>
-                            <constraint firstItem="r77-ra-BcV" firstAttribute="leading" secondItem="PnK-gK-u6d" secondAttribute="leading" id="xWR-4V-9Av"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Arithmetic" id="B4P-Gr-COy"/>
                     <connections>
                         <outlet property="hiscoreLabel" destination="b1q-K6-74M" id="kCb-xf-qGs"/>
-                        <outlet property="lastData" destination="r77-ra-BcV" id="RWG-fq-Ids"/>
                         <outlet property="messageLabel" destination="PnK-gK-u6d" id="qY0-8k-hfU"/>
                         <outlet property="questionLabel" destination="hRd-GG-DfR" id="aYH-6h-gaD"/>
                         <outlet property="scoreLabel" destination="HXi-Ek-xcT" id="C5c-S1-JgK"/>

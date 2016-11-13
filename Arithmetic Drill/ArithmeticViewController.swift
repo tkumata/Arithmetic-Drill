@@ -10,17 +10,14 @@ import UIKit
 
 class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate {
 
-    var answer: Int = 0
-    var userAnswer: Int = 0
+    var answer: Int = 0, userAnswer: Int = 0
     var timer: Timer!
     var tmCounter = 11
     
-    var score: Int = 0
-    var hiscore: Int = 0
+    var score: Int = 0, hiscore: Int = 0
+    var hiaccuracyRate: Double = 0.0
     
-    var questionOfNumber: Int = 0
-    var questionOfCorrect: Int = 0
-    var questionOfIncorrect: Int = 0
+    var questionOfNumber: Int = 0, questionOfCorrect: Int = 0, questionOfIncorrect: Int = 0
     var accuracyRate: Double = 0.0
     
     // Initialize variable from UserDefault.
@@ -28,28 +25,18 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     var burstModeFromUD: Bool = false
     var disable10FromUD: Bool = false
     
-    // TODO: Delete
-    var lastQNum: Int = 0
-    var lastQCorre: Int = 0
-    var lastQScore: Int = 0
-    
     // Outlet
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var hiscoreLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var userAnswerTxtField: UITextField!
-    // TODO: Delete
-    @IBOutlet weak var lastData: UILabel!
     
     // Action
     // MARK: When tap Next Question button.
     @IBAction func nextQuestionButton(_ sender: Any) {
         // Stop and initialize timer when timer moves already.
-        if (timer != nil) {
-            timer.invalidate()
-            timer = nil
-        }
+        stopTimer()
         
         // Initialize
         if disable10FromUD == false {
@@ -61,7 +48,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         userAnswerTxtField.isEnabled = true
         userAnswerTxtField.becomeFirstResponder()
         messageLabel.text = ""
-        var questionString: String = ""
+        var questionString = ""
         
         // Make question parts.
         var leftTerm1 = 0
@@ -102,6 +89,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             leftTerm1 = Int(arc4random_uniform(50)+1)
             leftTerm2 = Int(arc4random_uniform(50)+1)
         }
+        
         let kigouNum = Int(arc4random_uniform(3))
         var rightTerm: Int = 0
         var kigou: String = ""
@@ -160,11 +148,11 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.questionLabel.text = "e.g, X - 12 = 7"
-        self.messageLabel.text = "Let's arithmetic."
-        self.messageLabel.layer.cornerRadius = 10.0
-        self.messageLabel.layer.borderWidth = 1.0
-        self.messageLabel.layer.borderColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:1.0).cgColor
+        questionLabel.text = ""
+        messageLabel.text = ""
+        messageLabel.layer.cornerRadius = 10.0
+        messageLabel.layer.borderWidth = 1.0
+        messageLabel.layer.borderColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:1.0).cgColor
         
         // Read UserDefault
         let defaults = UserDefaults.standard
@@ -172,19 +160,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         burstModeFromUD = defaults.bool(forKey: "BURSTMODE")
         disable10FromUD = defaults.bool(forKey: "DISABLE10")
         hiscore = defaults.integer(forKey: "HISCORE")
-        
-        // TODO: Delete
-        lastQNum = defaults.integer(forKey: "QNUM")
-        lastQCorre = defaults.integer(forKey: "CORRECTNUM")
-        lastQScore = defaults.integer(forKey: "SCORE")
-        lastData.text = "Your last data.\n" +
-            "Score: " + String(lastQScore) +
-            "\nQuestion: " + String(lastQNum) +
-            "\nCorrect: " + String(lastQCorre) +
-            "\nLevel: " + String(levelFromUD)
+        hiaccuracyRate = defaults.double(forKey: "HIRATE")
         
         // Restore hiscore.
-        hiscoreLabel.text = "HiScore: " + String(hiscore)
+        hiscoreLabel.text = "HiScore: " + String(hiscore) + "(" + String(hiaccuracyRate) + "%)"
         
         // textfield delegate.
         userAnswerTxtField.delegate = self
@@ -193,9 +172,13 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         userAnswerTxtField.isEnabled = false
         
         // initialize custom keyboard
-        let keyboardView = Keyboard(frame: CGRect(x: 0, y: 0, width: 0, height: 250))
+        let keyboardView = Keyboard(frame: CGRect(x: 0, y: 0, width: 0, height: 240))
         keyboardView.delegate = self
         userAnswerTxtField.inputView = keyboardView
+        
+        
+        // Finaly, start arithmetic drill.
+        nextQuestionButton(self)
     }
 
     // required method for keyboard delegate protocol
@@ -217,12 +200,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // Stop timer.
-        if (timer != nil) {
-            timer.invalidate()
-            timer = nil
-        }
-        
+        stopTimer()
         burstModeFromUD = false
         userAnswerTxtField.isEnabled = false
         userAnswerTxtField.resignFirstResponder()
@@ -236,12 +214,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     
     // MARK: 入力終了 = 答え合わせ
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-        // Stop timer.
-        if (timer != nil) {
-            timer.invalidate()
-            timer = nil
-        }
-        
+        stopTimer()
         questionOfNumber += 1
         
         // Unavailable textfield.
@@ -249,10 +222,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         userAnswerTxtField.resignFirstResponder()
         
         // Get textfield value.
-        let userAnswerText = textField.text! as NSString
+        let userAnswerText = textField.text! as String
         
         // Convert cast.
-        userAnswer = (userAnswerText as NSString).integerValue
+        userAnswer = Int(userAnswerText as String)!
         
         // MARK: Check answer.
         var messTmp: String = ""
@@ -298,8 +271,9 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             // MARK: Update hiscore.
             if score > hiscore {
                 hiscore = score
-                hiscoreLabel.text = "HiScore: " + String(hiscore)
+                hiscoreLabel.text = "HiScore: " + String(hiscore) + "(" + String(accuracyRate) + "%)"
                 defaults.set(hiscore, forKey: "HISCORE")
+                defaults.set(accuracyRate, forKey: "HIRATE")
             }
         }
         
@@ -319,11 +293,19 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     
     // MARK: timer update function.
     func update(tm: Timer) {
-        tmCounter -= 1
-        self.messageLabel.text = String(tmCounter)
-        
         if tmCounter == 0 {
+            stopTimer()
             view.endEditing(true)
+        } else {
+            tmCounter -= 1
+            self.messageLabel.text = String(tmCounter)
+        }
+    }
+    
+    func stopTimer() {
+        if (timer != nil) {
+            timer.invalidate()
+            timer = nil
         }
     }
     

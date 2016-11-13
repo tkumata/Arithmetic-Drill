@@ -14,9 +14,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var otherButtonOutlet: UIButton!
     @IBOutlet weak var settingsButtonOutlet: UIButton!
     
-    // 各画面から戻るボタン
-    @IBAction func backToHome (segue: UIStoryboardSegue) {
-    }
+    // Back button.
+//    @IBAction func backToHome (segue: UIStoryboardSegue) {
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
