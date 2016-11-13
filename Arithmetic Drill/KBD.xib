@@ -131,7 +131,7 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="keyTappedWithSender:" destination="-1" eventType="touchUpInside" id="hXu-s1-Cjc"/>
+                        <action selector="DoneWithSender:" destination="-1" eventType="touchUpInside" id="UaV-2u-YCh"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sXJ-cY-8UM">
@@ -144,6 +144,27 @@
                     </state>
                     <connections>
                         <action selector="keyTappedWithSender:" destination="-1" eventType="touchUpInside" id="afc-VW-zSg"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fq0-sG-Mkr">
+                    <rect key="frame" x="15" y="0.0" width="51" height="70"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Del"/>
+                    <connections>
+                        <action selector="backspaceWithSender:" destination="-1" eventType="touchUpInside" id="UWC-di-IaF"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyk-gJ-6TT">
+                    <rect key="frame" x="308" y="0.0" width="51" height="70"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="0">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="keyTappedWithSender:" destination="-1" eventType="touchUpInside" id="eZv-zd-Nyc"/>
                     </connections>
                 </button>
             </subviews>

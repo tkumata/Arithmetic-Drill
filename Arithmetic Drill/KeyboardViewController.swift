@@ -10,6 +10,8 @@ import UIKit
 
 protocol KeyboardDelegate: class {
     func keyWasTapped(character: String)
+    func keyDone()
+    func backspace()
 }
 
 class Keyboard: UIView {
@@ -40,6 +42,13 @@ class Keyboard: UIView {
         self.delegate?.keyWasTapped(character: sender.titleLabel!.text!) // could alternatively send a tag value
     }
     
+    @IBAction func Done(sender: UIButton) {
+        self.delegate?.keyDone()
+    }
+    
+    @IBAction func backspace(sender: UIButton) {
+        self.delegate?.backspace()
+    }
 //    override func updateViewConstraints() {
 //        super.updateViewConstraints()
 //        

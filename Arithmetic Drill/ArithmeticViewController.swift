@@ -201,9 +201,12 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     // required method for keyboard delegate protocol
     func keyWasTapped(character: String) {
         userAnswerTxtField.insertText(character)
-        if character == "Done" {
-            view.endEditing(true)
-        }
+    }
+    func keyDone() {
+        view.endEditing(true)
+    }
+    func backspace() {
+        userAnswerTxtField.deleteBackward()
     }
     
     override func didReceiveMemoryWarning() {
