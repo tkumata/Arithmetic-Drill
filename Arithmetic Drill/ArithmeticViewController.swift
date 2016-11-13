@@ -232,10 +232,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         userAnswerTxtField.resignFirstResponder()
         
         // Get textfield value.
-        let userAnswerText = textField.text! as String
+        let userAnswerText = textField.text! as NSString
         
         // Convert cast.
-        userAnswer = Int(userAnswerText as String)!
+        userAnswer = (userAnswerText as NSString).integerValue
         
         // MARK: Check answer.
         var messTmp: String = ""
