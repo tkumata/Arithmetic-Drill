@@ -45,6 +45,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             tmCounter = 1
         }
         
+        
         userAnswerTxtField.isEnabled = true
         userAnswerTxtField.becomeFirstResponder()
         messageLabel.text = ""
@@ -90,6 +91,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             leftTerm2 = Int(arc4random_uniform(50)+1)
         }
         
+        
         let kigouNum = Int(arc4random_uniform(3))
         var rightTerm: Int = 0
         var kigou: String = ""
@@ -110,6 +112,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             kigou = "+"
         }
         
+        
         // Decide masking part.
         let maskNum = Int(arc4random_uniform(2))
         
@@ -129,6 +132,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             questionString = "X " + kigou + " " + String(leftTerm2) + " = " + String(rightTerm)
         }
         
+        
         self.questionLabel.text = questionString
         
         // Make timer.
@@ -142,6 +146,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             // Start timer.
             timer.fire()
         }
+        
+        
     }
     
     override func viewDidLoad() {
@@ -181,6 +187,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         nextQuestionButton(self)
     }
 
+
     // required method for keyboard delegate protocol
     func keyWasTapped(character: String) {
         userAnswerTxtField.insertText(character)
@@ -191,11 +198,13 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     func backspace() {
         userAnswerTxtField.deleteBackward()
     }
-    
+
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -211,7 +220,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             defaults.set(questionOfNumber, forKey: "QNUM")
         }
     }
-    
+
+
     // MARK: 入力終了 = 答え合わせ
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         stopTimer()
@@ -290,7 +300,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         userAnswerTxtField.resignFirstResponder()
         return true
     }
-    
+
+
     // MARK: timer update function.
     func update(tm: Timer) {
         if tmCounter == 0 {
@@ -301,14 +312,16 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             self.messageLabel.text = String(tmCounter)
         }
     }
-    
+
+
     func stopTimer() {
         if (timer != nil) {
             timer.invalidate()
             timer = nil
         }
     }
-    
+
+
     /*
     // MARK: - Navigation
 

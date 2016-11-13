@@ -18,6 +18,8 @@ class Keyboard: UIView {
 
     var delegate: KeyboardDelegate?
     
+    @IBOutlet weak var delButtonOutlet: UIButton!
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initializeSubviews()
@@ -27,8 +29,7 @@ class Keyboard: UIView {
         super.init(frame: frame)
         initializeSubviews()
     }
-    
-    @IBOutlet weak var delButtonOutlet: UIButton!
+
     func initializeSubviews() {
         let xibFileName = "KBD" // xib extention not included
         let view = Bundle.main.loadNibNamed(xibFileName, owner: self, options: nil)?[0] as! UIView

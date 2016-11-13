@@ -24,17 +24,22 @@ class SettingsViewController: UIViewController {
         let defaults = UserDefaults.standard
         defaults.set(levelNum, forKey: "LEVEL")
     }
+
+
     // MARK: Tap Burst mode switch.
     @IBAction func burstModeAction(_ sender: UISwitch) {
         let defaults = UserDefaults.standard
         defaults.set(sender.isOn, forKey: "BURSTMODE")
     }
+
+
     // MARK: Tap Disable 10 count switch.
     @IBAction func disable10Action(_ sender: UISwitch) {
         let defaults = UserDefaults.standard
         defaults.set(sender.isOn, forKey: "DISABLE10")
     }
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,11 +50,13 @@ class SettingsViewController: UIViewController {
         myScrollView.frame = scrollFrame
         let contentsRect = settingContentsView.bounds
         myScrollView.contentSize = CGSize(width: contentsRect.width, height: contentsRect.height)
-        
+
+
         // MARK: Set value from User Defaults.
         let defaults = UserDefaults.standard
         let levelFromUD = defaults.integer(forKey: "LEVEL")
-        
+
+
         if case 1...10 = levelFromUD {
             levelLabel.text = String(levelFromUD)
             levelStepperOutlet.value = Double(levelFromUD)
@@ -61,6 +68,7 @@ class SettingsViewController: UIViewController {
         burstModeOutlet.isOn = defaults.bool(forKey: "BURSTMODE")
         disable10Outlet.isOn = defaults.bool(forKey: "DISABLE10")
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
