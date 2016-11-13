@@ -29,11 +29,16 @@ class Keyboard: UIView {
         initializeSubviews()
     }
     
+    @IBOutlet weak var delButtonOutlet: UIButton!
     func initializeSubviews() {
         let xibFileName = "KBD" // xib extention not included
         let view = Bundle.main.loadNibNamed(xibFileName, owner: self, options: nil)?[0] as! UIView
         self.addSubview(view)
         view.frame = self.bounds
+        
+        self.delButtonOutlet.layer.cornerRadius = 10.0
+        self.delButtonOutlet.layer.borderWidth = 1.0
+        self.delButtonOutlet.layer.borderColor = UIColor(red:0/255, green:122/255, blue:255/255, alpha:1.0).cgColor
     }
     
     @IBAction func keyTapped(sender: UIButton) {
@@ -49,6 +54,7 @@ class Keyboard: UIView {
     @IBAction func backspace(sender: UIButton) {
         self.delegate?.backspace()
     }
+    
 //    override func updateViewConstraints() {
 //        super.updateViewConstraints()
 //        
