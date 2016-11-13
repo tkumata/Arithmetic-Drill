@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArithmeticViewController: UIViewController, UITextFieldDelegate {
+class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate {
 
     var answer: Int = 0
     var userAnswer: Int = 0
@@ -191,8 +191,21 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate {
         
         // textfield unavailable when starting.
         userAnswerTxtField.isEnabled = false
+        
+        // initialize custom keyboard
+        let keyboardView = Keyboard(frame: CGRect(x: 0, y: 0, width: 0, height: 250))
+        keyboardView.delegate = self
+        userAnswerTxtField.inputView = keyboardView
     }
 
+    // required method for keyboard delegate protocol
+    func keyWasTapped(character: String) {
+        userAnswerTxtField.insertText(character)
+        if character == "Done" {
+            view.endEditing(true)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
