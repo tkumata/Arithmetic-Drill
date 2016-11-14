@@ -11,7 +11,7 @@ import UIKit
 class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate {
 
     var answer: Int = 0, userAnswer: Int = 0
-    var timer: Timer!, imageTimer: Timer!
+    var timer: Timer!
     var tmCounter = 11
     
     var score: Int = 0, hiscore: Int = 0
@@ -24,7 +24,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     var levelFromUD: Int = 5
     var burstModeFromUD: Bool = false
     var disable10FromUD: Bool = false
-    
+
+    //
     var imageView: UIImageView!
     
     // Outlet
