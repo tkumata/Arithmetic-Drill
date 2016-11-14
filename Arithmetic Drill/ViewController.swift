@@ -18,15 +18,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
-        startButtonOutlet.layer.cornerRadius = 10.0
+        startButtonOutlet.layer.cornerRadius = 5.0
         startButtonOutlet.layer.borderWidth = 1.0
         startButtonOutlet.layer.borderColor = UIColor(red:0/255, green:122/255, blue:255/255, alpha:1.0).cgColor
         
-        otherButtonOutlet.layer.cornerRadius = 10.0
+        otherButtonOutlet.layer.cornerRadius = 5.0
         otherButtonOutlet.layer.borderWidth = 1.0
         otherButtonOutlet.layer.borderColor = UIColor(red:0/255, green:122/255, blue:255/255, alpha:1.0).cgColor
         
-        settingsButtonOutlet.layer.cornerRadius = 10.0
+        settingsButtonOutlet.layer.cornerRadius = 5.0
         settingsButtonOutlet.layer.borderWidth = 1.0
         settingsButtonOutlet.layer.borderColor = UIColor(red:0/255, green:122/255, blue:255/255, alpha:1.0).cgColor
     }

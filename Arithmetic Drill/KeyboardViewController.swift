@@ -36,7 +36,7 @@ class Keyboard: UIView {
         self.addSubview(view)
         view.frame = self.bounds
         
-        self.delButtonOutlet.layer.cornerRadius = 10.0
+        self.delButtonOutlet.layer.cornerRadius = 5.0
         self.delButtonOutlet.layer.borderWidth = 1.0
         self.delButtonOutlet.layer.borderColor = UIColor(red:0/255, green:122/255, blue:255/255, alpha:1.0).cgColor
     }

@@ -17,7 +17,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     var score: Int = 0, hiscore: Int = 0
     var hiaccuracyRate: Double = 0.0
     
-    var questionOfNumber: Int = 0, questionOfCorrect: Int = 0, questionOfIncorrect: Int = 0
+    var questionNumber: Int = 0, questionCorrect: Int = 0, questionIncorrect: Int = 0
     var accuracyRate: Double = 0.0
     
     // Initialize variable from UserDefault.
@@ -25,7 +25,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     var burstModeFromUD: Bool = false
     var disable10FromUD: Bool = false
 
-    //
+    // Image of result of checking answer.
     var imageView: UIImageView!
     
     // Outlet
@@ -40,7 +40,9 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     @IBAction func nextQuestionButton(_ sender: Any) {
         // Stop and initialize timer when timer moves already.
         stopTimer()
-        stopImage()
+        
+        // Remove image on screen.
+        removeResultImage()
         
         // Initialize
         if disable10FromUD == false {
@@ -48,7 +50,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         } else {
             tmCounter = 1
         }
-        
         
         userAnswerTxtField.isEnabled = true
         userAnswerTxtField.becomeFirstResponder()
@@ -94,8 +95,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             leftTerm1 = Int(arc4random_uniform(50)+1)
             leftTerm2 = Int(arc4random_uniform(50)+1)
         }
-        
-        
+
         let kigouNum = Int(arc4random_uniform(3))
         var rightTerm: Int = 0
         var kigou: String = ""
@@ -150,17 +150,16 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             // Start timer.
             timer.fire()
         }
-        
-        
     }
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         questionLabel.text = ""
         messageLabel.text = ""
-        messageLabel.layer.cornerRadius = 10.0
+        messageLabel.layer.cornerRadius = 5.0
         messageLabel.layer.borderWidth = 1.0
         messageLabel.layer.borderColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:1.0).cgColor
         
@@ -181,12 +180,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         // textfield unavailable when starting.
         userAnswerTxtField.isEnabled = false
         
-        // initialize custom keyboard
+        // initialize custom keyboard.
         let keyboardView = Keyboard(frame: CGRect(x: 0, y: 0, width: 0, height: 250))
         keyboardView.delegate = self
         userAnswerTxtField.inputView = keyboardView
-        
-
         
         // Finaly, start arithmetic drill.
         nextQuestionButton(self)
@@ -219,18 +216,23 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         userAnswerTxtField.isEnabled = false
         userAnswerTxtField.resignFirstResponder()
         
-        if burstModeFromUD && questionOfNumber > 1 {
-            questionOfNumber -= 1
+        if burstModeFromUD && questionNumber > 1 {
+            questionNumber -= 1
             let defaults = UserDefaults.standard
-            defaults.set(questionOfNumber, forKey: "QNUM")
+            defaults.set(questionNumber, forKey: "QNUM")
         }
     }
 
 
     // MARK: 入力終了 = 答え合わせ
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        var messageTmp: String = ""
+        
+        // Stop timer.
         stopTimer()
-        questionOfNumber += 1
+        
+        // Increase number.
+        questionNumber += 1
         
         // Unavailable textfield.
         userAnswerTxtField.isEnabled = false
@@ -238,68 +240,58 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         
         // Get textfield value.
         let userAnswerText = textField.text! as NSString
-        
         // Convert cast.
         userAnswer = (userAnswerText as NSString).integerValue
         
         // MARK: Check answer.
-        var messTmp: String = ""
         if (self.answer == userAnswer) {
             // Correct
-            questionOfCorrect += 1
+            questionCorrect += 1
             
             if tmCounter > 0 {
                 score += tmCounter
-                messTmp = "Correct"
+                messageTmp = "Correct"
             }
             
             // Bonus point
             if tmCounter > 7 {
                 score += 10
-                messTmp += " and bounus point"
+                messageTmp += " and bounus point"
             }
             
             // Display image
             if burstModeFromUD == false {
-                let rect = CGRect(x: (self.view.frame.width/2)-120, y: self.view.frame.height/2, width: 240, height: 240)
-                imageView = UIImageView(frame: rect)
-                imageView.contentMode = .scaleAspectFit
-                imageView.image = UIImage(named: "Yes.png")
-                self.view.addSubview(imageView)
+                checkResultImg(result: true)
             }
         } else {
             // Incorrect
-            questionOfIncorrect += 1
+            questionIncorrect += 1
             
             if tmCounter == 0 {
-                messTmp = "Time up"
+                messageTmp = "Time up"
             } else {
-                messTmp = "Incorrect\n" + String(answer)
+                messageTmp = "Incorrect\n" + String(answer)
             }
             
             // Display image
             if burstModeFromUD == false {
-                let rect = CGRect(x: (self.view.frame.width/2)-120, y: self.view.frame.height/2, width: 240, height: 240)
-                imageView = UIImageView(frame: rect)
-                imageView.contentMode = .scaleAspectFit
-                imageView.image = UIImage(named: "No.png")
-                self.view.addSubview(imageView)
+                checkResultImg(result: false)
             }
         }
         
-        messageLabel.text = messTmp
+        messageLabel.text = messageTmp
         
         // Overwrite score with accuracy rate
-        if questionOfCorrect > 0 && questionOfNumber > 0 {
+        if questionCorrect > 0 && questionNumber > 0 {
             // MARK: Update score.
-            accuracyRate = Double(questionOfCorrect * 100 / questionOfNumber)
+            accuracyRate = Double(questionCorrect * 100 / questionNumber)
             scoreLabel.text = "Score: " + String(score) + "(" + String(accuracyRate) + "%)"
             
             // MARK: Save result to User Default.
             let defaults = UserDefaults.standard
             defaults.set(score, forKey: "SCORE")
-            defaults.set(questionOfNumber, forKey: "QNUM")
-            defaults.set(questionOfCorrect, forKey: "CORRECTNUM")
+            defaults.set(questionNumber, forKey: "QNUM")
+            defaults.set(questionCorrect, forKey: "CORRECTNUM")
 
             // MARK: Update hiscore.
             if score > hiscore {
@@ -315,28 +307,28 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             nextQuestionButton(self)
         }
     }
-    
+
+
     // MARK: When tap return key.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        view.endEditing(true)
-//        return false
         userAnswerTxtField.resignFirstResponder()
         return true
     }
 
 
-    // MARK: timer update function.
+    // MARK: Function which updates timer.
     func update(tm: Timer) {
         if tmCounter == 0 {
             stopTimer()
             view.endEditing(true)
         } else {
             tmCounter -= 1
-            self.messageLabel.text = String(tmCounter)
+            self.messageLabel.text = String(tmCounter) + "sec left"
         }
     }
 
 
+    // MARK: Function which stops timer.
     func stopTimer() {
         if (timer != nil) {
             timer.invalidate()
@@ -345,10 +337,27 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     }
 
 
-    func stopImage() {
+    // MARK: Function which appears image on screen.
+    func checkResultImg(result: Bool) {
+        var fileName = ""
+        
+        if result == true {
+            fileName = "Yes.png"
+        } else {
+            fileName = "No.png"
+        }
+        
+        let rect = CGRect(x: (view.frame.width/2)-120, y: view.frame.height/2, width: 240, height: 240)
+        imageView = UIImageView(frame: rect)
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: fileName)
+        self.view.addSubview(imageView)
+    }
+
+
+    // MARK: Function which remove image on screen.
+    func removeResultImage() {
         if imageView != nil {
-//            imageView.setNeedsDisplay()
-//            imageView.layoutIfNeeded()
             imageView.removeFromSuperview()
             imageView.image = nil
         }
