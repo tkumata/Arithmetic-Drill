@@ -23,8 +23,8 @@
 		899D05BE1DD811A8007F6238 /* ss02.png in Resources */ = {isa = PBXBuildFile; fileRef = 899D05BD1DD811A8007F6238 /* ss02.png */; };
 		89CB521F1DD04AAC00DEBD89 /* ArithmeticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CB521E1DD04AAC00DEBD89 /* ArithmeticViewController.swift */; };
 		89EE87431DD05ACB0006F632 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EE87421DD05ACB0006F632 /* SettingsViewController.swift */; };
-		89F51BE91DDA84BB00E21B1F /* ss04.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F51BE71DDA84BB00E21B1F /* ss04.png */; };
-		89F51BEA1DDA84BB00E21B1F /* ss03.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F51BE81DDA84BB00E21B1F /* ss03.png */; };
+		89F51BEC1DDA860E00E21B1F /* ss03.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F51BEB1DDA860E00E21B1F /* ss03.png */; };
+		89F51BEE1DDA861D00E21B1F /* ss04.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F51BED1DDA861D00E21B1F /* ss04.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,8 +60,8 @@
 		89CA47AC1DD6AC2D004D31F6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		89CB521E1DD04AAC00DEBD89 /* ArithmeticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArithmeticViewController.swift; sourceTree = "<group>"; };
 		89EE87421DD05ACB0006F632 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		89F51BE71DDA84BB00E21B1F /* ss04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ss04.png; path = ../../../../ss04.png; sourceTree = "<group>"; };
-		89F51BE81DDA84BB00E21B1F /* ss03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ss03.png; path = ../../../../ss03.png; sourceTree = "<group>"; };
+		89F51BEB1DDA860E00E21B1F /* ss03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ss03.png; sourceTree = "<group>"; };
+		89F51BED1DDA861D00E21B1F /* ss04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ss04.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +81,8 @@
 			children = (
 				892D0BA51DD7F5810091F3E9 /* ss01.png */,
 				899D05BD1DD811A8007F6238 /* ss02.png */,
-				89F51BE81DDA84BB00E21B1F /* ss03.png */,
-				89F51BE71DDA84BB00E21B1F /* ss04.png */,
+				89F51BED1DDA861D00E21B1F /* ss04.png */,
+				89F51BEB1DDA860E00E21B1F /* ss03.png */,
 				89036BFC1DD99FA200EA707C /* No.png */,
 				89036BFD1DD99FA200EA707C /* Yes.png */,
 				897EC4BB1DD9E3690087C859 /* chime.mp3 */,
@@ -197,15 +197,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				897EC4BC1DD9E3690087C859 /* chime.mp3 in Resources */,
-				89F51BE91DDA84BB00E21B1F /* ss04.png in Resources */,
 				89036BFE1DD99FA200EA707C /* No.png in Resources */,
 				8965BC4D1DD022EB00E20CAE /* LaunchScreen.storyboard in Resources */,
 				892D0BA71DD7F5810091F3E9 /* ss01.png in Resources */,
 				89036BFF1DD99FA200EA707C /* Yes.png in Resources */,
+				89F51BEE1DDA861D00E21B1F /* ss04.png in Resources */,
 				892D0B9B1DD7F0C50091F3E9 /* KBD.xib in Resources */,
+				89F51BEC1DDA860E00E21B1F /* ss03.png in Resources */,
 				8965BC4A1DD022EB00E20CAE /* Assets.xcassets in Resources */,
 				8965BC451DD022EB00E20CAE /* Main.storyboard in Resources */,
-				89F51BEA1DDA84BB00E21B1F /* ss03.png in Resources */,
 				899D05BE1DD811A8007F6238 /* ss02.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
