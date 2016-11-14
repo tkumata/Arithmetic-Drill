@@ -6,6 +6,8 @@ This is a arithmetic drill app for from element school children to elder.
 
 !["SS"](./imgs/ss01.png)
 !["SS"](./imgs/ss02.png)
+!["SS"](./imgs/ss03.png)
+!["SS"](./imgs/ss04.png)
 
 X position randomly changes each question. Is this similar to KUMON? I do not know KUMON.
 
