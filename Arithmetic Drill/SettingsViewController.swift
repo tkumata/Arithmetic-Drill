@@ -10,6 +10,9 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    //
+    let userData = UserDefaults.standard
+    
     @IBOutlet weak var myScrollView: UIScrollView!
     @IBOutlet weak var settingContentsView: UIView!
     @IBOutlet weak var levelLabel: UILabel!
@@ -17,26 +20,23 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var burstModeOutlet: UISwitch!
     @IBOutlet weak var disable10Outlet: UISwitch!
     
-    // MARK: Tap Level stepper.
+    // MARK: Level stepper.
     @IBAction func levelStepperAction(_ sender: UIStepper) {
         let levelNum = Int(sender.value)
         levelLabel.text = String(levelNum)
-        let defaults = UserDefaults.standard
-        defaults.set(levelNum, forKey: "LEVEL")
+        userData.set(levelNum, forKey: "LEVEL")
     }
 
 
-    // MARK: Tap Burst mode switch.
+    // MARK: Burst mode switch.
     @IBAction func burstModeAction(_ sender: UISwitch) {
-        let defaults = UserDefaults.standard
-        defaults.set(sender.isOn, forKey: "BURSTMODE")
+        userData.set(sender.isOn, forKey: "BURSTMODE")
     }
 
 
-    // MARK: Tap Disable 10 count switch.
+    // MARK: Disable 10 count switch.
     @IBAction func disable10Action(_ sender: UISwitch) {
-        let defaults = UserDefaults.standard
-        defaults.set(sender.isOn, forKey: "DISABLE10")
+        userData.set(sender.isOn, forKey: "DISABLE10")
     }
 
 
@@ -53,20 +53,18 @@ class SettingsViewController: UIViewController {
 
 
         // MARK: Set value from User Defaults.
-        let defaults = UserDefaults.standard
-        let levelFromUD = defaults.integer(forKey: "LEVEL")
-
+        let levelFromUD = userData.integer(forKey: "LEVEL")
 
         if case 1...10 = levelFromUD {
             levelLabel.text = String(levelFromUD)
             levelStepperOutlet.value = Double(levelFromUD)
         } else {
             levelLabel.text = String("5")
-            defaults.set("5", forKey: "LEVEL")
+            userData.set("5", forKey: "LEVEL")
         }
         
-        burstModeOutlet.isOn = defaults.bool(forKey: "BURSTMODE")
-        disable10Outlet.isOn = defaults.bool(forKey: "DISABLE10")
+        burstModeOutlet.isOn = userData.bool(forKey: "BURSTMODE")
+        disable10Outlet.isOn = userData.bool(forKey: "DISABLE10")
     }
 
 

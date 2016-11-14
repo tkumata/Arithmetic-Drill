@@ -11,6 +11,9 @@ import AVFoundation
 
 class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate {
 
+    //
+    let userData = UserDefaults.standard
+    
     var answer: Int = 0, userAnswer: Int = 0
     var timer: Timer!
     var tmCounter = 11
@@ -168,12 +171,11 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         messageLabel.layer.borderColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:1.0).cgColor
         
         // Read UserDefault
-        let defaults = UserDefaults.standard
-        levelFromUD = defaults.integer(forKey: "LEVEL")
-        burstModeFromUD = defaults.bool(forKey: "BURSTMODE")
-        disable10FromUD = defaults.bool(forKey: "DISABLE10")
-        hiscore = defaults.integer(forKey: "HISCORE")
-        hiaccuracyRate = defaults.double(forKey: "HIRATE")
+        levelFromUD = userData.integer(forKey: "LEVEL")
+        burstModeFromUD = userData.bool(forKey: "BURSTMODE")
+        disable10FromUD = userData.bool(forKey: "DISABLE10")
+        hiscore = userData.integer(forKey: "HISCORE")
+        hiaccuracyRate = userData.double(forKey: "HIRATE")
         
         // Restore hiscore.
         hiscoreLabel.text = "HiScore: " + String(hiscore) + "(" + String(hiaccuracyRate) + "%)"
@@ -222,8 +224,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         
         if burstModeFromUD && questionNumber > 1 {
             questionNumber -= 1
-            let defaults = UserDefaults.standard
-            defaults.set(questionNumber, forKey: "QNUM")
+            userData.set(questionNumber, forKey: "QNUM")
         }
     }
 
@@ -280,7 +281,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             }
             
             // Display image
-            if burstModeFromUD == false {
+            if burstModeFromUD == false && userAnswer != 0 {
                 checkResultImg(result: false)
             }
         }
@@ -294,17 +295,16 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             scoreLabel.text = "Score: " + String(score) + "(" + String(accuracyRate) + "%)"
             
             // MARK: Save result to User Default.
-            let defaults = UserDefaults.standard
-            defaults.set(score, forKey: "SCORE")
-            defaults.set(questionNumber, forKey: "QNUM")
-            defaults.set(questionCorrect, forKey: "CORRECTNUM")
+            userData.set(score, forKey: "SCORE")
+            userData.set(questionNumber, forKey: "QNUM")
+            userData.set(questionCorrect, forKey: "CORRECTNUM")
 
             // MARK: Update hiscore.
             if score > hiscore {
                 hiscore = score
                 hiscoreLabel.text = "HiScore: " + String(hiscore) + "(" + String(accuracyRate) + "%)"
-                defaults.set(hiscore, forKey: "HISCORE")
-                defaults.set(accuracyRate, forKey: "HIRATE")
+                userData.set(hiscore, forKey: "HISCORE")
+                userData.set(accuracyRate, forKey: "HIRATE")
             }
         }
         
@@ -329,7 +329,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             view.endEditing(true)
         } else {
             tmCounter -= 1
-            self.messageLabel.text = String(tmCounter) + "sec left"
+            self.messageLabel.text = String(tmCounter) + " sec left"
         }
     }
 
