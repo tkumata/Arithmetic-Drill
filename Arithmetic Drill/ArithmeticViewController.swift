@@ -114,7 +114,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         
         
         // Decide masking part.
-        let maskNum = Int(arc4random_uniform(2))
+        let maskNum = Int(arc4random_uniform(3))
         
         // Display question.
         switch maskNum {
