@@ -178,7 +178,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         userAnswerTxtField.isEnabled = false
         
         // initialize custom keyboard
-        let keyboardView = Keyboard(frame: CGRect(x: 0, y: 0, width: 0, height: 240))
+        let keyboardView = Keyboard(frame: CGRect(x: 0, y: 0, width: 0, height: 250))
         keyboardView.delegate = self
         userAnswerTxtField.inputView = keyboardView
         
