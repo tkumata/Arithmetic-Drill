@@ -30,7 +30,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     var imageView: UIImageView!
     
     // Sound of answer is correct.
-    var player: AVAudioPlayer!
+    var player: AVAudioPlayer?
     
     // Outlet
     @IBOutlet weak var scoreLabel: UILabel!
