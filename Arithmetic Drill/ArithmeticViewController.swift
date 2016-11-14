@@ -11,7 +11,7 @@ import UIKit
 class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate {
 
     var answer: Int = 0, userAnswer: Int = 0
-    var timer: Timer!
+    var timer: Timer!, imageTimer: Timer!
     var tmCounter = 11
     
     var score: Int = 0, hiscore: Int = 0
@@ -25,6 +25,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     var burstModeFromUD: Bool = false
     var disable10FromUD: Bool = false
     
+    var imageView: UIImageView!
+    
     // Outlet
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var hiscoreLabel: UILabel!
@@ -37,6 +39,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     @IBAction func nextQuestionButton(_ sender: Any) {
         // Stop and initialize timer when timer moves already.
         stopTimer()
+        stopImage()
         
         // Initialize
         if disable10FromUD == false {
@@ -137,12 +140,12 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         
         // Make timer.
         if disable10FromUD == false {
+            // Timer
             timer = Timer.scheduledTimer(timeInterval: 1.0,
                                          target: self,
                                          selector: #selector(self.update),
                                          userInfo: nil,
                                          repeats: true)
-            
             // Start timer.
             timer.fire()
         }
@@ -182,6 +185,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         keyboardView.delegate = self
         userAnswerTxtField.inputView = keyboardView
         
+
         
         // Finaly, start arithmetic drill.
         nextQuestionButton(self)
@@ -253,6 +257,15 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
                 score += 10
                 messTmp += " and bounus point"
             }
+            
+            // Display image
+            if burstModeFromUD == false {
+                let rect = CGRect(x: (self.view.frame.width/2)-120, y: self.view.frame.height/2, width: 240, height: 240)
+                imageView = UIImageView(frame: rect)
+                imageView.contentMode = .scaleAspectFit
+                imageView.image = UIImage(named: "Yes.png")
+                self.view.addSubview(imageView)
+            }
         } else {
             // Incorrect
             questionOfIncorrect += 1
@@ -261,6 +274,15 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
                 messTmp = "Time up"
             } else {
                 messTmp = "Incorrect\n" + String(answer)
+            }
+            
+            // Display image
+            if burstModeFromUD == false {
+                let rect = CGRect(x: (self.view.frame.width/2)-120, y: self.view.frame.height/2, width: 240, height: 240)
+                imageView = UIImageView(frame: rect)
+                imageView.contentMode = .scaleAspectFit
+                imageView.image = UIImage(named: "No.png")
+                self.view.addSubview(imageView)
             }
         }
         
@@ -318,6 +340,16 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         if (timer != nil) {
             timer.invalidate()
             timer = nil
+        }
+    }
+
+
+    func stopImage() {
+        if imageView != nil {
+//            imageView.setNeedsDisplay()
+//            imageView.layoutIfNeeded()
+            imageView.removeFromSuperview()
+            imageView.image = nil
         }
     }
 
