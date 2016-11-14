@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate {
 
@@ -27,6 +28,9 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
 
     // Image of result of checking answer.
     var imageView: UIImageView!
+    
+    // Sound of answer is correct.
+    var player: AVAudioPlayer!
     
     // Outlet
     @IBOutlet weak var scoreLabel: UILabel!
@@ -248,6 +252,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             // Correct
             questionCorrect += 1
             
+            playSound()
+            
             if tmCounter > 0 {
                 score += tmCounter
                 messageTmp = "Correct"
@@ -360,6 +366,25 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         if imageView != nil {
             imageView.removeFromSuperview()
             imageView.image = nil
+        }
+    }
+
+
+    // MARK: Function which play sound.
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "chime", withExtension: "mp3") else {
+            print("url not found")
+            return
+        }
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            guard let player = player else { return }
+            
+            player.prepareToPlay()
+            player.play()
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
 
