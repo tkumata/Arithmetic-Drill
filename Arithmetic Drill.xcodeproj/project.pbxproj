@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		89036BFE1DD99FA200EA707C /* No.png in Resources */ = {isa = PBXBuildFile; fileRef = 89036BFC1DD99FA200EA707C /* No.png */; };
 		89036BFF1DD99FA200EA707C /* Yes.png in Resources */ = {isa = PBXBuildFile; fileRef = 89036BFD1DD99FA200EA707C /* Yes.png */; };
+		8914C4CE1DDACBD800C0097B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8914C4CD1DDACBD800C0097B /* AudioToolbox.framework */; };
 		892D0B9B1DD7F0C50091F3E9 /* KBD.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8982FEBF1DD7D159000EA9E9 /* KBD.xib */; };
 		892D0BA71DD7F5810091F3E9 /* ss01.png in Resources */ = {isa = PBXBuildFile; fileRef = 892D0BA51DD7F5810091F3E9 /* ss01.png */; };
 		8965BC401DD022EB00E20CAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965BC3F1DD022EB00E20CAE /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		89036BFC1DD99FA200EA707C /* No.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = No.png; sourceTree = "<group>"; };
 		89036BFD1DD99FA200EA707C /* Yes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Yes.png; sourceTree = "<group>"; };
+		8914C4CD1DDACBD800C0097B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		892D0BA51DD7F5810091F3E9 /* ss01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ss01.png; sourceTree = "<group>"; };
 		8965BC3C1DD022EA00E20CAE /* Arithmetic Drill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arithmetic Drill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8965BC3F1DD022EB00E20CAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8914C4CE1DDACBD800C0097B /* AudioToolbox.framework in Frameworks */,
 				897EC4BF1DD9E3800087C859 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +133,7 @@
 		897EC4BD1DD9E3800087C859 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8914C4CD1DDACBD800C0097B /* AudioToolbox.framework */,
 				897EC4BE1DD9E3800087C859 /* AVFoundation.framework */,
 			);
 			name = Frameworks;

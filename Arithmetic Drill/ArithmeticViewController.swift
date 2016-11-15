@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import AudioToolbox.AudioServices
 
 class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate {
 
@@ -393,6 +394,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             
             player.prepareToPlay()
             player.play()
+            
+            // Um, I seem this is bad idea.
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         } catch let error {
             print(error.localizedDescription)
         }
