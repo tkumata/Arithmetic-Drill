@@ -25,7 +25,7 @@ X position randomly changes each question. Is this similar to KUMON? I do not kn
 - [x] バーストモード
 - [x] レベル設定
 - [x] 待ち時間なしモード
-- [ ] 九九モード
+- [X] 九九モード
 - [x] 独自キーボード
 
 

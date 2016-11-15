@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C41b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aTf-I3-3bV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C48b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aTf-I3-3bV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -280,6 +280,12 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="88i-99-9tA">
+                                                <rect key="frame" x="296" y="223" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="kukuModeAction:" destination="KFb-8z-wGR" eventType="valueChanged" id="sPB-xO-qgS"/>
+                                                </connections>
+                                            </switch>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -287,6 +293,7 @@
                                             <constraint firstItem="DVe-UT-RNf" firstAttribute="centerY" secondItem="O0c-XJ-buY" secondAttribute="centerY" id="6J5-hB-oIs"/>
                                             <constraint firstItem="m2F-I8-c5d" firstAttribute="top" secondItem="4J6-UX-KGU" secondAttribute="bottom" constant="38" id="AF2-wx-FmW"/>
                                             <constraint firstItem="4J6-UX-KGU" firstAttribute="trailing" secondItem="oBC-vj-WeO" secondAttribute="trailingMargin" id="AUH-Ku-41S"/>
+                                            <constraint firstAttribute="trailing" secondItem="88i-99-9tA" secondAttribute="trailing" constant="30" id="CTa-Xp-vkO"/>
                                             <constraint firstItem="1Zx-AN-wAD" firstAttribute="top" secondItem="oBC-vj-WeO" secondAttribute="top" constant="4" id="DLQ-Wg-iGK"/>
                                             <constraint firstItem="5sD-Yf-7rg" firstAttribute="top" secondItem="1Zx-AN-wAD" secondAttribute="bottom" constant="8" symbolic="YES" id="JO6-X9-zTO"/>
                                             <constraint firstItem="XUC-Pb-lwe" firstAttribute="leading" secondItem="1Zx-AN-wAD" secondAttribute="trailing" constant="65" id="Lse-zU-nLC"/>
@@ -306,7 +313,9 @@
                                             <constraint firstItem="XUC-Pb-lwe" firstAttribute="top" secondItem="oBC-vj-WeO" secondAttribute="top" constant="20" id="gxy-oC-cwb"/>
                                             <constraint firstItem="m2F-I8-c5d" firstAttribute="leading" secondItem="O0c-XJ-buY" secondAttribute="leading" id="j5f-Og-Zp9"/>
                                             <constraint firstItem="XUC-Pb-lwe" firstAttribute="top" secondItem="4J6-UX-KGU" secondAttribute="top" id="r2N-XA-H7P"/>
+                                            <constraint firstItem="88i-99-9tA" firstAttribute="leading" secondItem="Ype-zq-Gxb" secondAttribute="trailing" constant="138" id="rKH-BS-jiP"/>
                                             <constraint firstItem="5sD-Yf-7rg" firstAttribute="leading" secondItem="DVe-UT-RNf" secondAttribute="leading" id="vQz-Zg-vwt"/>
+                                            <constraint firstItem="88i-99-9tA" firstAttribute="top" secondItem="O0c-XJ-buY" secondAttribute="bottom" constant="37" id="vfp-IS-UTz"/>
                                             <constraint firstItem="DVe-UT-RNf" firstAttribute="top" secondItem="5sD-Yf-7rg" secondAttribute="bottom" constant="8" symbolic="YES" id="wW2-47-ufE"/>
                                         </constraints>
                                     </view>
@@ -334,6 +343,7 @@
                     <connections>
                         <outlet property="burstModeOutlet" destination="m2F-I8-c5d" id="Q3S-9D-V3a"/>
                         <outlet property="disable10Outlet" destination="O0c-XJ-buY" id="hPU-JA-H3H"/>
+                        <outlet property="kukuModeOutlet" destination="88i-99-9tA" id="gnI-dn-fRS"/>
                         <outlet property="levelLabel" destination="XUC-Pb-lwe" id="PFL-6p-amb"/>
                         <outlet property="levelStepperOutlet" destination="4J6-UX-KGU" id="xMd-7J-dLd"/>
                         <outlet property="myScrollView" destination="3hz-hf-Di1" id="YMe-aV-FSe"/>

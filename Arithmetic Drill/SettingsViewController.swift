@@ -19,6 +19,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var levelStepperOutlet: UIStepper!
     @IBOutlet weak var burstModeOutlet: UISwitch!
     @IBOutlet weak var disable10Outlet: UISwitch!
+    @IBOutlet weak var kukuModeOutlet: UISwitch!
     
     // MARK: Level stepper.
     @IBAction func levelStepperAction(_ sender: UIStepper) {
@@ -39,6 +40,9 @@ class SettingsViewController: UIViewController {
         userData.set(sender.isOn, forKey: "DISABLE10")
     }
 
+    @IBAction func kukuModeAction(_ sender: UISwitch) {
+        userData.set(sender.isOn, forKey: "99MODE")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +69,7 @@ class SettingsViewController: UIViewController {
         
         burstModeOutlet.isOn = userData.bool(forKey: "BURSTMODE")
         disable10Outlet.isOn = userData.bool(forKey: "DISABLE10")
+        kukuModeOutlet.isOn = userData.bool(forKey: "99MODE")
     }
 
 

@@ -28,6 +28,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     var levelFromUD: Int = 5
     var burstModeFromUD: Bool = false
     var disable10FromUD: Bool = false
+    var kukuModeFromUD: Bool = false
 
     // Image of result of checking answer.
     var imageView: UIImageView!
@@ -62,6 +63,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         userAnswerTxtField.becomeFirstResponder()
         messageLabel.text = ""
         var questionString = ""
+        
+        if kukuModeFromUD {
+            levelFromUD = 1
+        }
         
         // Make question parts.
         var leftTerm1 = 0
@@ -103,9 +108,14 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             leftTerm2 = Int(arc4random_uniform(50)+1)
         }
 
-        let kigouNum = Int(arc4random_uniform(3))
+        var kigouNum = Int(arc4random_uniform(3))
         var rightTerm: Int = 0
         var kigou: String = ""
+        
+        //
+        if kukuModeFromUD {
+            kigouNum = 2
+        }
         
         // 記号の生成
         switch kigouNum {
@@ -122,7 +132,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             rightTerm = leftTerm1 + leftTerm2
             kigou = "+"
         }
-        
         
         // Decide masking part.
         let maskNum = Int(arc4random_uniform(3))
@@ -174,6 +183,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         levelFromUD = userData.integer(forKey: "LEVEL")
         burstModeFromUD = userData.bool(forKey: "BURSTMODE")
         disable10FromUD = userData.bool(forKey: "DISABLE10")
+        kukuModeFromUD = userData.bool(forKey: "99MODE")
         hiscore = userData.integer(forKey: "HISCORE")
         hiaccuracyRate = userData.double(forKey: "HIRATE")
         
