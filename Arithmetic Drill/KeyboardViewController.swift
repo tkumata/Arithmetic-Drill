@@ -26,7 +26,9 @@ class Keyboard: UIView {
     }
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
+        let vWidth = 0
+        let vHeight = 250
+        super.init(frame: CGRect(x: 0, y: 0, width: vWidth, height: vHeight))
         initializeSubviews()
     }
 

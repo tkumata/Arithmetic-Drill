@@ -109,7 +109,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HiScore: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1q-K6-74M">
-                                <rect key="frame" x="208" y="64" width="161" height="27"/>
+                                <rect key="frame" x="169" y="64" width="200" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -175,7 +175,7 @@
                             <constraint firstItem="Kjy-jT-ZDq" firstAttribute="top" secondItem="kOv-Co-E9o" secondAttribute="bottom" constant="26" id="9om-Zu-vgs"/>
                             <constraint firstItem="ESg-0d-NwQ" firstAttribute="baseline" secondItem="kqq-mb-09M" secondAttribute="baseline" id="ALQ-gy-Gmo"/>
                             <constraint firstItem="HXi-Ek-xcT" firstAttribute="firstBaseline" secondItem="b1q-K6-74M" secondAttribute="firstBaseline" id="ChW-vH-62K"/>
-                            <constraint firstItem="b1q-K6-74M" firstAttribute="leading" secondItem="HXi-Ek-xcT" secondAttribute="trailing" constant="39" id="E2R-xr-Y5q"/>
+                            <constraint firstItem="b1q-K6-74M" firstAttribute="leading" secondItem="HXi-Ek-xcT" secondAttribute="trailing" id="E2R-xr-Y5q"/>
                             <constraint firstItem="HXi-Ek-xcT" firstAttribute="leading" secondItem="Thg-4n-WSM" secondAttribute="leadingMargin" constant="-8" id="E75-lw-EN8"/>
                             <constraint firstAttribute="bottom" secondItem="8k5-2f-zOA" secondAttribute="bottom" constant="20" symbolic="YES" id="JEd-cy-oY4"/>
                             <constraint firstItem="kqq-mb-09M" firstAttribute="top" secondItem="Kjy-jT-ZDq" secondAttribute="bottom" constant="67" id="LEB-7O-75D"/>
@@ -259,8 +259,8 @@
                                                     <action selector="disable10Action:" destination="KFb-8z-wGR" eventType="valueChanged" id="6hc-Cc-YYh"/>
                                                 </connections>
                                             </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disable 10 count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVe-UT-RNf">
-                                                <rect key="frame" x="8" y="217" width="150" height="60"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disable count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVe-UT-RNf">
+                                                <rect key="frame" x="8" y="217" width="280" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -333,7 +333,7 @@
                                             <constraint firstItem="DVe-UT-RNf" firstAttribute="leading" secondItem="GtG-6y-aPh" secondAttribute="leading" id="Q8h-9K-O96"/>
                                             <constraint firstItem="5sD-Yf-7rg" firstAttribute="leading" secondItem="xjI-zB-gPM" secondAttribute="leading" id="RUM-ok-L8y"/>
                                             <constraint firstItem="xjI-zB-gPM" firstAttribute="top" secondItem="m2F-I8-c5d" secondAttribute="bottom" constant="8" symbolic="YES" id="Sj5-Iw-IT9"/>
-                                            <constraint firstItem="DVe-UT-RNf" firstAttribute="trailing" secondItem="Ype-zq-Gxb" secondAttribute="trailing" id="TD6-fR-Y0R"/>
+                                            <constraint firstItem="DVe-UT-RNf" firstAttribute="trailing" secondItem="Ype-zq-Gxb" secondAttribute="trailing" constant="130" id="TD6-fR-Y0R"/>
                                             <constraint firstItem="m2F-I8-c5d" firstAttribute="leading" secondItem="O0c-XJ-buY" secondAttribute="leading" id="Ve7-bM-POT"/>
                                             <constraint firstItem="m2F-I8-c5d" firstAttribute="top" secondItem="Bt0-7u-OxZ" secondAttribute="bottom" constant="28" id="W77-VI-XW0"/>
                                             <constraint firstItem="4J6-UX-KGU" firstAttribute="centerX" secondItem="m2F-I8-c5d" secondAttribute="centerX" id="W9J-KI-eEk"/>
@@ -349,7 +349,7 @@
                                             <constraint firstItem="4J6-UX-KGU" firstAttribute="trailing" secondItem="Bt0-7u-OxZ" secondAttribute="trailing" id="kEO-fR-WXj"/>
                                             <constraint firstItem="5sD-Yf-7rg" firstAttribute="top" secondItem="Bt0-7u-OxZ" secondAttribute="bottom" constant="13" id="mNn-M0-buP"/>
                                             <constraint firstItem="GtG-6y-aPh" firstAttribute="trailing" secondItem="SRx-7n-LWk" secondAttribute="trailing" id="mqw-Rd-ov7"/>
-                                            <constraint firstItem="5sD-Yf-7rg" firstAttribute="trailing" secondItem="DVe-UT-RNf" secondAttribute="trailing" id="p5v-Mu-yYz"/>
+                                            <constraint firstItem="5sD-Yf-7rg" firstAttribute="trailing" secondItem="DVe-UT-RNf" secondAttribute="trailing" constant="-130" id="p5v-Mu-yYz"/>
                                             <constraint firstItem="1Zx-AN-wAD" firstAttribute="leading" secondItem="oBC-vj-WeO" secondAttribute="leadingMargin" id="qBA-CK-IZJ"/>
                                             <constraint firstItem="XUC-Pb-lwe" firstAttribute="top" secondItem="oBC-vj-WeO" secondAttribute="top" constant="20" id="qeR-i7-u17"/>
                                             <constraint firstItem="Bt0-7u-OxZ" firstAttribute="top" secondItem="4J6-UX-KGU" secondAttribute="bottom" constant="8" symbolic="YES" id="tNJ-r1-3Kr"/>
@@ -391,7 +391,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q8z-7G-Pff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2116" y="545"/>
+            <point key="canvasLocation" x="2116" y="544.22788605697156"/>
         </scene>
         <!--Other-->
         <scene sceneID="stq-dx-QNw">

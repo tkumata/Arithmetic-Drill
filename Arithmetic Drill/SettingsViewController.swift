@@ -21,7 +21,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var disable10Outlet: UISwitch!
     @IBOutlet weak var kukuModeOutlet: UISwitch!
     
-    // MARK: Level stepper.
+    // MARK: - Level stepper.
     @IBAction func levelStepperAction(_ sender: UIStepper) {
         let levelNum = Int(sender.value)
         levelLabel.text = String(levelNum)
@@ -29,27 +29,29 @@ class SettingsViewController: UIViewController {
     }
 
 
-    // MARK: Burst mode switch.
+    // MARK: - Burst mode switch.
     @IBAction func burstModeAction(_ sender: UISwitch) {
         userData.set(sender.isOn, forKey: "BURSTMODE")
     }
 
 
-    // MARK: Disable 10 count switch.
+    // MARK: - Disable 10 count switch.
     @IBAction func disable10Action(_ sender: UISwitch) {
         userData.set(sender.isOn, forKey: "DISABLE10")
     }
 
+
     @IBAction func kukuModeAction(_ sender: UISwitch) {
         userData.set(sender.isOn, forKey: "99MODE")
     }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        // MARK: Scroll View Setting
+        // MARK: Scroll View Setting.
         let scrollFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         myScrollView.frame = scrollFrame
         let contentsRect = settingContentsView.bounds
@@ -57,11 +59,11 @@ class SettingsViewController: UIViewController {
 
 
         // MARK: Set value from User Defaults.
-        let levelFromUD = userData.integer(forKey: "LEVEL")
+        let levelOnSettings = userData.integer(forKey: "LEVEL")
 
-        if case 1...10 = levelFromUD {
-            levelLabel.text = String(levelFromUD)
-            levelStepperOutlet.value = Double(levelFromUD)
+        if case 1...10 = levelOnSettings {
+            levelLabel.text = String(levelOnSettings)
+            levelStepperOutlet.value = Double(levelOnSettings)
         } else {
             levelLabel.text = String("5")
             userData.set("5", forKey: "LEVEL")
