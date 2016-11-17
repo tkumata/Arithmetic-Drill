@@ -73,41 +73,41 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         // Make question parts.
         switch levelOnSettings {
         case 1:
-            leftTerm1 = Int(arc4random_uniform(9)+1)
+            leftTerm1 = Int(arc4random_uniform(9)+1) // 0~8 + 1 = 1~9
             leftTerm2 = Int(arc4random_uniform(9)+1)
         case 2:
-            leftTerm1 = Int(arc4random_uniform(11)+1)
-            leftTerm2 = Int(arc4random_uniform(11)+1)
-        case 3:
-            leftTerm1 = Int(arc4random_uniform(13)+1)
-            leftTerm2 = Int(arc4random_uniform(13)+1)
-        case 4:
-            leftTerm1 = Int(arc4random_uniform(15)+1)
+            leftTerm1 = Int(arc4random_uniform(15)+1) // 0~14 + 1 = 1~15
             leftTerm2 = Int(arc4random_uniform(15)+1)
-        case 5:
-            leftTerm1 = Int(arc4random_uniform(20)+1)
+        case 3:
+            leftTerm1 = Int(arc4random_uniform(15)+1) // 0~14 + 1 = 1~15
+            leftTerm2 = Int(arc4random_uniform(15)+1)
+        case 4:
+            leftTerm1 = Int(arc4random_uniform(20)+1) // 0~19 + 1 = 1~20
             leftTerm2 = Int(arc4random_uniform(20)+1)
+        case 5:
+            leftTerm1 = Int(arc4random_uniform(16)+5) // 0~15 + 5 = 5~20
+            leftTerm2 = Int(arc4random_uniform(16)+5)
         case 6:
-            leftTerm1 = Int(arc4random_uniform(25)+1)
-            leftTerm2 = Int(arc4random_uniform(25)+1)
+            leftTerm1 = Int(arc4random_uniform(19)+5) // 0~20 + 5 = 5~25
+            leftTerm2 = Int(arc4random_uniform(19)+5)
         case 7:
-            leftTerm1 = Int(arc4random_uniform(30)+1)
-            leftTerm2 = Int(arc4random_uniform(30)+1)
+            leftTerm1 = Int(arc4random_uniform(36)+5) // 0~35 + 5 = 5~40
+            leftTerm2 = Int(arc4random_uniform(36)+5)
         case 8:
-            leftTerm1 = Int(arc4random_uniform(35)+1)
-            leftTerm2 = Int(arc4random_uniform(35)+1)
+            leftTerm1 = Int(arc4random_uniform(49)+5) // 0~40 + 5 = 5~50
+            leftTerm2 = Int(arc4random_uniform(49)+5)
         case 9:
-            leftTerm1 = Int(arc4random_uniform(40)+1)
-            leftTerm2 = Int(arc4random_uniform(40)+1)
+            leftTerm1 = Int(arc4random_uniform(56)+5) // 0~55 + 5 = 5~60
+            leftTerm2 = Int(arc4random_uniform(56)+5)
         case 10:
-            leftTerm1 = Int(arc4random_uniform(45)+1)
-            leftTerm2 = Int(arc4random_uniform(45)+1)
+            leftTerm1 = Int(arc4random_uniform(51)+5) // 0~50 + 10 = 10~60
+            leftTerm2 = Int(arc4random_uniform(51)+5)
         default:
-            leftTerm1 = Int(arc4random_uniform(50)+1)
-            leftTerm2 = Int(arc4random_uniform(50)+1)
+            leftTerm1 = Int(arc4random_uniform(16)+5) // same a level 5
+            leftTerm2 = Int(arc4random_uniform(16)+5)
         }
 
-        if levelOnSettings > 0 && levelOnSettings < 4 {
+        if levelOnSettings > 0 && levelOnSettings < 3 {
             kigouNum = Int(arc4random_uniform(2))
         } else if kukuModeOnSettings {
             kigouNum = 2
