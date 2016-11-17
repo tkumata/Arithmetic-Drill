@@ -376,7 +376,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         }
         
         let rect = CGRect(x: (view.frame.width/2)-(view.frame.width*0.65)/2,
-                          y: (view.frame.height/2)-view.frame.height/8,
+                          y: (view.frame.height/2)-(view.frame.height/2)/6,
                           width: view.frame.width*0.65,
                           height: view.frame.height*0.65)
         imageView = UIImageView(frame: rect)
