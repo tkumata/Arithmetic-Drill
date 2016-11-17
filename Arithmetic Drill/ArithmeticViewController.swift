@@ -17,7 +17,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     
     var answer: Int = 0, userAnswer: Int = 0
     var timer: Timer!
-    var timerCounter = 11
+    var timerCounter: Int = 11
     
     var score: Int = 0, hiscore: Int = 0
     var hiAccuracyRate: Double = 0.0
@@ -59,17 +59,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         messageLabel.text = ""
         
         // Initialize
-        if disable10OnSettings == false {
-            timerCounter = 11
-        } else {
-            timerCounter = 1
-        }
-        
-        if kukuModeOnSettings {
-            levelOnSettings = 1
-        }
-        
-        // Make question parts.
         var questionString: String = ""
         var leftTerm1: Int = 0
         var leftTerm2: Int = 0
@@ -77,6 +66,11 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         var rightTerm: Int = 0
         var kigou: String = ""
         
+        if kukuModeOnSettings {
+            levelOnSettings = 1
+        }
+        
+        // Make question parts.
         switch levelOnSettings {
         case 1:
             leftTerm1 = Int(arc4random_uniform(9)+1)
@@ -115,13 +109,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
 
         if levelOnSettings > 0 && levelOnSettings < 4 {
             kigouNum = Int(arc4random_uniform(2))
+        } else if kukuModeOnSettings {
+            kigouNum = 2
         } else {
             kigouNum = Int(arc4random_uniform(3))
-        }
-        
-        //
-        if kukuModeOnSettings {
-            kigouNum = 2
         }
         
         // 記号の生成
@@ -164,6 +155,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         
         // Make timer.
         if disable10OnSettings == false {
+            timerCounter = 11
+            
             // Timer
             timer = Timer.scheduledTimer(timeInterval: 1.0,
                                          target: self,
@@ -172,6 +165,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
                                          repeats: true)
             // Start timer.
             timer.fire()
+        } else {
+            timerCounter = 1
         }
     }
 
@@ -186,7 +181,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         messageLabel.text = ""
         messageLabel.layer.cornerRadius = 5.0
         messageLabel.layer.borderWidth = 1.0
-        messageLabel.layer.borderColor = UIColor(red:200/255, green:200/255, blue:200/255, alpha:1.0).cgColor
+        messageLabel.layer.borderColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0).cgColor
         
         // Read settings in User Default.
         levelOnSettings = userData.integer(forKey: "LEVEL")
@@ -206,7 +201,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         userAnswerTxtField.isEnabled = false
         
         // initialize custom keyboard.
-        let keyboardView = Keyboard()
+        let keyboardView = Keyboard(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         keyboardView.delegate = self
         userAnswerTxtField.inputView = keyboardView
         
@@ -236,8 +231,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     // MARK: - View will disappear
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         stopTimer()
+        
         burstModeOnSettings = false
         userAnswerTxtField.isEnabled = false
         userAnswerTxtField.resignFirstResponder()
@@ -367,7 +362,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
 
     // MARK: - Function which appears image on screen.
     func checkResultImg(result: Bool) {
-        var fileName = ""
+        var fileName: String = ""
         
         if result == true {
             fileName = "Yes.png"

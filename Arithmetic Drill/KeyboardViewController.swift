@@ -48,26 +48,33 @@ class Keyboard: UIView {
         self.addSubview(view)
         view.frame = self.bounds
         
-//        self.delButtonOutlet.layer.cornerRadius = 5.0
         self.delButtonOutlet.layer.borderWidth = 1.0
-        self.delButtonOutlet.layer.borderColor = UIColor(red:0/255, green:122/255, blue:255/255, alpha:1.0).cgColor
+        self.delButtonOutlet.layer.borderColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0).cgColor
         
         self.button1.layer.borderWidth = 1.0
         self.button1.layer.borderColor = UIColor.white.cgColor
+        
         self.button2.layer.borderWidth = 1.0
         self.button2.layer.borderColor = UIColor.white.cgColor
+        
         self.button3.layer.borderWidth = 1.0
         self.button3.layer.borderColor = UIColor.white.cgColor
+        
         self.button5.layer.borderWidth = 1.0
         self.button5.layer.borderColor = UIColor.white.cgColor
+        
         self.button6.layer.borderWidth = 1.0
         self.button6.layer.borderColor = UIColor.white.cgColor
+        
         self.button7.layer.borderWidth = 1.0
         self.button7.layer.borderColor = UIColor.white.cgColor
+        
         self.button8.layer.borderWidth = 1.0
         self.button8.layer.borderColor = UIColor.white.cgColor
+        
         self.button9.layer.borderWidth = 1.0
         self.button9.layer.borderColor = UIColor.white.cgColor
+        
         self.buttonM.layer.borderWidth = 1.0
         self.buttonM.layer.borderColor = UIColor.white.cgColor
     }
