@@ -28,7 +28,9 @@ class Keyboard: UIView {
     @IBOutlet weak var button7: UIButton!
     @IBOutlet weak var button8: UIButton!
     @IBOutlet weak var button9: UIButton!
+    @IBOutlet weak var button0: UIButton!
     @IBOutlet weak var buttonM: UIButton!
+    @IBOutlet weak var buttonD: UIButton!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -48,35 +50,46 @@ class Keyboard: UIView {
         self.addSubview(view)
         view.frame = self.bounds
         
-        self.delButtonOutlet.layer.borderWidth = 1.0
+        let borderWidth: Float = 0.5
+        
+        self.delButtonOutlet.layer.borderWidth = CGFloat(borderWidth)
         self.delButtonOutlet.layer.borderColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0).cgColor
         
-        self.button1.layer.borderWidth = 1.0
+        self.button1.layer.borderWidth = CGFloat(borderWidth)
         self.button1.layer.borderColor = UIColor.white.cgColor
         
-        self.button2.layer.borderWidth = 1.0
+        self.button2.layer.borderWidth = CGFloat(borderWidth)
         self.button2.layer.borderColor = UIColor.white.cgColor
         
-        self.button3.layer.borderWidth = 1.0
+        self.button3.layer.borderWidth = CGFloat(borderWidth)
         self.button3.layer.borderColor = UIColor.white.cgColor
         
-        self.button5.layer.borderWidth = 1.0
+        self.button4.layer.borderWidth = CGFloat(borderWidth)
+        self.button4.layer.borderColor = UIColor.white.cgColor
+        
+        self.button5.layer.borderWidth = CGFloat(borderWidth)
         self.button5.layer.borderColor = UIColor.white.cgColor
         
-        self.button6.layer.borderWidth = 1.0
+        self.button6.layer.borderWidth = CGFloat(borderWidth)
         self.button6.layer.borderColor = UIColor.white.cgColor
         
-        self.button7.layer.borderWidth = 1.0
+        self.button7.layer.borderWidth = CGFloat(borderWidth)
         self.button7.layer.borderColor = UIColor.white.cgColor
         
-        self.button8.layer.borderWidth = 1.0
+        self.button8.layer.borderWidth = CGFloat(borderWidth)
         self.button8.layer.borderColor = UIColor.white.cgColor
         
-        self.button9.layer.borderWidth = 1.0
+        self.button9.layer.borderWidth = CGFloat(borderWidth)
         self.button9.layer.borderColor = UIColor.white.cgColor
         
-        self.buttonM.layer.borderWidth = 1.0
+        self.button0.layer.borderWidth = CGFloat(borderWidth)
+        self.button0.layer.borderColor = UIColor.white.cgColor
+        
+        self.buttonM.layer.borderWidth = CGFloat(borderWidth)
         self.buttonM.layer.borderColor = UIColor.white.cgColor
+        
+        self.buttonD.layer.borderWidth = CGFloat(borderWidth)
+        self.buttonD.layer.borderColor = UIColor.white.cgColor
     }
     
     @IBAction func keyTapped(sender: UIButton) {

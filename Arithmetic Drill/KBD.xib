@@ -13,6 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Keyboard" customModule="Arithmetic_Drill" customModuleProvider="target">
             <connections>
+                <outlet property="button0" destination="cyk-gJ-6TT" id="VXs-Sc-zeT"/>
                 <outlet property="button1" destination="zHX-5n-igg" id="irB-KM-krJ"/>
                 <outlet property="button2" destination="yWV-eu-OaI" id="X7S-P5-MXD"/>
                 <outlet property="button3" destination="wXg-lf-DOB" id="AQR-Mq-m6u"/>
@@ -22,6 +23,7 @@
                 <outlet property="button7" destination="SVQ-tq-CVx" id="RJb-it-IP5"/>
                 <outlet property="button8" destination="oIA-dj-Hrg" id="9rj-RC-EOb"/>
                 <outlet property="button9" destination="l5z-e4-oPE" id="C0a-rc-D7j"/>
+                <outlet property="buttonD" destination="ntb-z9-wzd" id="LfB-RT-P1e"/>
                 <outlet property="buttonM" destination="sXJ-cY-8UM" id="HNe-fT-s9F"/>
                 <outlet property="delButtonOutlet" destination="Fq0-sG-Mkr" id="6C9-QC-Fsj"/>
             </connections>
