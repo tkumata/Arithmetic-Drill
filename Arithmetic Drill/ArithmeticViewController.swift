@@ -88,8 +88,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             leftTerm1 = Int(arc4random_uniform(16)+5) // 0~15 + 5 = 5~20
             leftTerm2 = Int(arc4random_uniform(16)+5)
         case 6:
-            leftTerm1 = Int(arc4random_uniform(19)+5) // 0~20 + 5 = 5~25
-            leftTerm2 = Int(arc4random_uniform(19)+5)
+            leftTerm1 = Int(arc4random_uniform(21)+5) // 0~20 + 5 = 5~25
+            leftTerm2 = Int(arc4random_uniform(21)+5)
         case 7:
             leftTerm1 = Int(arc4random_uniform(36)+5) // 0~35 + 5 = 5~40
             leftTerm2 = Int(arc4random_uniform(36)+5)
