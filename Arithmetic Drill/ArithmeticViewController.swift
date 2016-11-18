@@ -51,7 +51,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         stopTimer()
         
         // Remove image on screen.
-        removeResultImage()
+//        removeResultImage()
         
         // Ready to textfield.
         userAnswerTxtField.isEnabled = true
@@ -268,9 +268,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             // Correct
             questionCorrect += 1
 
-            // Play sound. If silend mode, vibrate.
-            playSound()
-            
             if timerCounter > 0 {
                 score += timerCounter
                 tmpMessage = "Correct"
@@ -284,7 +281,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             
             // Display image
             if settingsBurstMode == false {
-                checkResultImg(result: true)
+                checkResultImage(result: true)
+
+                // Play sound. If silend mode, vibrate.
+                playSound(result: true)
             }
         } else {
             // Incorrect
@@ -298,7 +298,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             
             // Display image
             if settingsBurstMode == false && userAnswer != 0 {
-                checkResultImg(result: false)
+                checkResultImage(result: false)
+                
+                // Play sound. If silend mode, vibrate.
+                playSound(result: false)
             }
         }
         
@@ -361,7 +364,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
 
 
     // MARK: - Function which appears image on screen.
-    func checkResultImg(result: Bool) {
+    func checkResultImage(result: Bool) {
         var fileName: String = ""
         
         if result == true {
@@ -370,6 +373,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             fileName = "No.png"
         }
         
+        // Add image to sub view.
         let rect = CGRect(x: (view.frame.width/2)-(view.frame.width*0.65)/2,
                           y: (view.frame.height/2)-(view.frame.height/2)/2+(view.frame.height*0.1),
                           width: view.frame.width*0.65,
@@ -377,22 +381,56 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         imageView = UIImageView(frame: rect)
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: fileName)
+        imageView.alpha = 0
         self.view.addSubview(imageView)
+
+        // Animate view.
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            options: [.curveEaseInOut],
+            animations: {
+                self.imageView.alpha = 1.0
+            },
+            completion: {(finished: Bool) in
+                self.fadeOutImage(self.imageView)
+        })
     }
 
 
     // MARK: - Function which remove image on screen.
+    func fadeOutImage(_ view: UIView) {
+        UIView.animate(
+            withDuration: 1.0,
+            delay: 0.5,
+            options: [.curveEaseInOut],
+            animations: {
+                view.alpha = 0.0
+            },
+            completion: {(finished: Bool) in
+                view.removeFromSuperview()
+        })
+    }
+
+
     func removeResultImage() {
         if imageView != nil {
             imageView.removeFromSuperview()
-            imageView.image = nil
+//            imageView.image = nil
         }
     }
 
 
     // MARK: - Function which play sound.
-    func playSound() {
-        guard let url = Bundle.main.url(forResource: "chime", withExtension: "mp3") else {
+    func playSound(result: Bool) {
+        var soundFile: String = ""
+        if result == true {
+            soundFile = "chime"
+        } else {
+            soundFile = "boo"
+        }
+        
+        guard let url = Bundle.main.url(forResource: soundFile, withExtension: "mp3") else {
             print("url not found")
             return
         }
