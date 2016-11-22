@@ -423,20 +423,15 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
 
     // MARK: - Function which play sound.
     func playSound(result: Bool) {
-        var soundFile: String = ""
+        var soundFile: NSDataAsset!
         if result == true {
-            soundFile = "chime"
+            soundFile = NSDataAsset(name: "chime")
         } else {
-            soundFile = "boo"
+            soundFile = NSDataAsset(name: "boo")
         }
-        
-        guard let url = Bundle.main.url(forResource: soundFile, withExtension: "mp3") else {
-            print("url not found")
-            return
-        }
-        
+
         do {
-            player = try AVAudioPlayer(contentsOf: url)
+            player = try AVAudioPlayer(data: soundFile.data, fileTypeHint: AVFileTypeMPEGLayer3)
             guard let player = player else { return }
             
             player.prepareToPlay()
