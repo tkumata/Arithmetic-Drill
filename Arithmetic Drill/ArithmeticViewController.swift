@@ -210,7 +210,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     }
 
 
-    // MARK: - required method for keyboard delegate protocol
+    // MARK: required method for keyboard delegate protocol
     func keyWasTapped(character: String) {
         userAnswerTxtField.insertText(character)
     }
