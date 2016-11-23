@@ -109,10 +109,12 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
 
         if settingsLevel > 0 && settingsLevel < 3 {
             mathSymbolNum = Int(arc4random_uniform(2))
-        } else if settingsKukuMode {
-            mathSymbolNum = 2
         } else {
             mathSymbolNum = Int(arc4random_uniform(3))
+        }
+
+        if settingsKukuMode {
+            mathSymbolNum = 2
         }
         
         // 記号の生成
