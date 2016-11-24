@@ -30,7 +30,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     var settingsBurstMode: Bool = false
     var settingsDisable10: Bool = false
     var settingsKukuMode: Bool = false
-    var settingCntinue: Bool = false
+    var settingContinue: Bool = false
 
     // Image of result of checking answer.
     var imageView: UIImageView!
@@ -188,22 +188,20 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         settingsBurstMode = userData.bool(forKey: "BURSTMODE")
         settingsDisable10 = userData.bool(forKey: "DISABLE10")
         settingsKukuMode = userData.bool(forKey: "99MODE")
-        settingCntinue = userData.bool(forKey: "CONTINUE")
+        settingContinue = userData.bool(forKey: "CONTINUE")
         hiscore = userData.integer(forKey: "HISCORE")
         hiAccuracyRate = userData.double(forKey: "HIRATE")
         
         // Restore score and accuracy rate.
-        if settingCntinue {
-            score = userData.integer(forKey: "SCORE")
-            questionNumber = userData.integer(forKey: "QNUM")
-            questionCorrect = userData.integer(forKey: "CORRECTNUM")
-            
-            if score > 0 && questionCorrect > 0 && questionNumber > 0 {
-                accuracyRate = Double(questionCorrect * 100 / questionNumber)
-                scoreLabel.text = "Score: " + String(score) + "(" + String(accuracyRate) + "%)"
-            } else {
-                scoreLabel.text = "Score: 0 (0.0%)"
-            }
+        score = userData.integer(forKey: "SCORE")
+        questionNumber = userData.integer(forKey: "QNUM")
+        questionCorrect = userData.integer(forKey: "CORRECTNUM")
+        
+        if settingContinue && score > 0 && questionCorrect > 0 && questionNumber > 0 {
+            accuracyRate = Double(questionCorrect * 100 / questionNumber)
+            scoreLabel.text = "Score: " + String(score) + "(" + String(accuracyRate) + "%)"
+        } else {
+            scoreLabel.text = "Score: 0(0.0%)"
         }
         
         // Restore hiscore and hight accuracy rate.
