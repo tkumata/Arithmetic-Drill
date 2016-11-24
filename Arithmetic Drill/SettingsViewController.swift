@@ -47,6 +47,7 @@ class SettingsViewController: UIViewController {
         userData.set(sender.isOn, forKey: "99MODE")
     }
 
+    // MARK: - Continue mode switch.
     @IBAction func continueSwitchAction(_ sender: UISwitch) {
         userData.set(sender.isOn, forKey: "CONTINUE")
     }
@@ -75,6 +76,7 @@ class SettingsViewController: UIViewController {
             userData.set("5", forKey: "LEVEL")
         }
         
+        // MARK: - Apply switch status at opening this page.
         burstModeOutlet.isOn = userData.bool(forKey: "BURSTMODE")
         disable10Outlet.isOn = userData.bool(forKey: "DISABLE10")
         kukuModeOutlet.isOn = userData.bool(forKey: "99MODE")

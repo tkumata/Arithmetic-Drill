@@ -176,12 +176,15 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
         // Attributes.
+        // Question label.
         questionLabel.text = ""
+        // Message label.
         messageLabel.text = ""
         messageLabel.layer.cornerRadius = 10.0
         messageLabel.layer.borderWidth = 1.0
-        messageLabel.layer.borderColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0).cgColor
+        messageLabel.layer.borderColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0).cgColor
         
         // Read settings in User Default.
         settingsLevel = userData.integer(forKey: "LEVEL")
