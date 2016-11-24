@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a arithmetic drill app for from element school children to elder.
+This is a arithmetic drill app for from element school children to elder. Let's train your brain.
 
 !["SS"](./imgs/ss01.png)
 !["SS"](./imgs/ss02.png)
@@ -28,6 +28,23 @@ X position randomly changes each question. Is this similar to KUMON? I do not kn
 - [X] 九九モード
 - [x] 独自キーボード
 - [x] サイレントモード時はバイブレーション
+- [x] 継続モード
+
+
+### About level
+
+| Level | Numeric Number | Mathematic Symbol |
+|------:|:---------------|:-----------------:|
+| 1  | 1-9   | +-  |
+| 2  | 1-15  | +-  |
+| 3  | 1-15  | +-* |
+| 4  | 1-20  | +-* |
+| 5  | 5-20  | +-* |
+| 6  | 5-25  | +-* |
+| 7  | 5-40  | +-* |
+| 8  | 5-50  | +-* |
+| 9  | 5-60  | +-* |
+| 10 | 10-60 | +-* |
 
 
 ## License

@@ -30,6 +30,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     var settingsBurstMode: Bool = false
     var settingsDisable10: Bool = false
     var settingsKukuMode: Bool = false
+    var settingCntinue: Bool = false
 
     // Image of result of checking answer.
     var imageView: UIImageView!
@@ -53,12 +54,12 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         // Remove image on screen.
 //        removeResultImage()
         
-        // Ready to textfield.
+        // MARK: Prepare textfield.
         userAnswerTxtField.isEnabled = true
         userAnswerTxtField.becomeFirstResponder()
         messageLabel.text = ""
         
-        // Initialize
+        // MARK: Initialize
         var questionString: String = ""
         var leftTerm1: Int = 0
         var leftTerm2: Int = 0
@@ -70,7 +71,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             settingsLevel = 1
         }
         
-        // Make question parts.
+        // MARK: Make question parts.
         switch settingsLevel {
         case 1:
             leftTerm1 = Int(arc4random_uniform(9)+1) // 0~8 + 1 = 1~9
@@ -107,6 +108,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             leftTerm2 = Int(arc4random_uniform(16)+5)
         }
 
+        // MARK: Make mathematic symbol.
         if settingsLevel > 0 && settingsLevel < 3 {
             mathSymbolNum = Int(arc4random_uniform(2))
         } else {
@@ -117,7 +119,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             mathSymbolNum = 2
         }
         
-        // 記号の生成
         switch mathSymbolNum {
         case 0:
             rightTerm = leftTerm1 + leftTerm2
@@ -133,10 +134,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             mathSymbol = "+"
         }
         
-        // Decide masking part.
+        // MARK: Decide masking part.
         let maskNumber = Int(arc4random_uniform(3)) // 0, 1, 2
         
-        // Display question.
+        // MARK: Display question.
         switch maskNumber {
         case 0:
             maskedAnswer = leftTerm1
@@ -152,20 +153,17 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             questionString = "X " + mathSymbol + " " + String(leftTerm2) + " = " + String(rightTerm)
         }
         
-        // Display question.
         self.questionLabel.text = questionString
         
-        // Make timer or not.
+        // MARK: Make timer or not.
         if settingsDisable10 == false {
             timerCounter = 11
             
-            // Timer
             timer = Timer.scheduledTimer(timeInterval: 1.0,
                                          target: self,
                                          selector: #selector(self.update),
                                          userInfo: nil,
                                          repeats: true)
-            // Start timer.
             timer.fire()
         } else {
             timerCounter = 1
@@ -190,10 +188,25 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         settingsBurstMode = userData.bool(forKey: "BURSTMODE")
         settingsDisable10 = userData.bool(forKey: "DISABLE10")
         settingsKukuMode = userData.bool(forKey: "99MODE")
+        settingCntinue = userData.bool(forKey: "CONTINUE")
         hiscore = userData.integer(forKey: "HISCORE")
         hiAccuracyRate = userData.double(forKey: "HIRATE")
         
-        // Restore hiscore.
+        // Restore score and accuracy rate.
+        if settingCntinue {
+            score = userData.integer(forKey: "SCORE")
+            questionNumber = userData.integer(forKey: "QNUM")
+            questionCorrect = userData.integer(forKey: "CORRECTNUM")
+            
+            if score > 0 && questionCorrect > 0 && questionNumber > 0 {
+                accuracyRate = Double(questionCorrect * 100 / questionNumber)
+                scoreLabel.text = "Score: " + String(score) + "(" + String(accuracyRate) + "%)"
+            } else {
+                scoreLabel.text = "Score: 0 (0.0%)"
+            }
+        }
+        
+        // Restore hiscore and hight accuracy rate.
         hiscoreLabel.text = "HiScore: " + String(hiscore) + "(" + String(hiAccuracyRate) + "%)"
         
         // textfield delegate.
@@ -202,7 +215,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         // textfield unavailable when starting.
         userAnswerTxtField.isEnabled = false
         
-        // initialize custom keyboard.
+        // Initialize custom keyboard.
         let keyboardView = Keyboard(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         keyboardView.delegate = self
         userAnswerTxtField.inputView = keyboardView
@@ -224,6 +237,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     }
 
 
+    // MARK: - didReceiveMemoryWarning
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -250,17 +264,17 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         var tmpMessage: String = ""
         
-        // Stop timer.
+        // MARK: Stop timer.
         stopTimer()
         
-        // Increase number.
+        // MARK: Increase number.
         questionNumber += 1
         
-        // Unavailable textfield.
+        // MARK: Unavailable textfield.
         userAnswerTxtField.isEnabled = false
         userAnswerTxtField.resignFirstResponder()
         
-        // Get textfield value.
+        // MARK: Get textfield value.
         let userAnswerText = textField.text! as NSString
         // Convert cast.
         userAnswer = (userAnswerText as NSString).integerValue
@@ -307,10 +321,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             }
         }
         
-        // Display message.
+        // MARK: Display message.
         messageLabel.text = tmpMessage
         
-        // Overwrite score with accuracy rate
+        // MARK: Overwrite score with accuracy rate
         if questionCorrect > 0 && questionNumber > 0 {
             // Update score.
             accuracyRate = Double(questionCorrect * 100 / questionNumber)
@@ -415,10 +429,11 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     }
 
 
+    // MARK: Function which remove image on screen.
     func removeResultImage() {
         if imageView != nil {
             imageView.removeFromSuperview()
-//            imageView.image = nil
+            // imageView.image = nil
         }
     }
 
@@ -426,6 +441,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     // MARK: - Function which play sound.
     func playSound(result: Bool) {
         var soundFile: NSDataAsset!
+        
         if result == true {
             soundFile = NSDataAsset(name: "chime")
         } else {
@@ -439,6 +455,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             player.prepareToPlay()
             player.play()
             
+            // Vibration.
             // Um, I seem this is bad idea.
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
