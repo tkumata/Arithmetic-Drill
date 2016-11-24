@@ -9,8 +9,9 @@
 import UIKit
 import AVFoundation
 import AudioToolbox.AudioServices
+import MultipeerConnectivity
 
-class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate {
+class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate, MCSessionDelegate {
 
     // Read User Default
     let userData = UserDefaults.standard
@@ -38,6 +39,13 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     // Sound of answer is correct.
     var player: AVAudioPlayer?
     
+    // Peer connectivity.
+    let myPeerId = MCPeerID(displayName: UIDevice.current.name)
+    var mySession: MCSession!
+    var serviceAdvertiser: MCNearbyServiceAdvertiser!
+    var browser: MCNearbyServiceBrowser!
+    let dispatchQueue = DispatchQueue(label: "ArithmeticDrillQueue")
+    
     // Outlet
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var hiscoreLabel: UILabel!
@@ -46,6 +54,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     @IBOutlet weak var userAnswerTxtField: UITextField!
     
     // Action
+    @IBAction func vsModeButtonAction(_ sender: UIButton) {
+        browser.startBrowsingForPeers()
+    }
+    
     // MARK: - When tap Next Question button.
     @IBAction func nextQuestionButton(_ sender: Any) {
         // Stop and initialize timer when timer moves already.
@@ -170,7 +182,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         }
     }
 
-
     // MARK: - View did load
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -221,11 +232,53 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         keyboardView.delegate = self
         userAnswerTxtField.inputView = keyboardView
         
+        // Multipeer Connectivity.
+        let serviceType = "ArithmeticDrill"
+        mySession = MCSession(peer: myPeerId)
+        mySession.delegate = self
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: serviceType)
+        serviceAdvertiser.startAdvertisingPeer()
+        browser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
+
         // Finaly, start arithmetic drill.
         nextQuestionButton(self)
     }
 
-
+    // MARK: - Advertiser.
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
+                    didReceiveInvitationFromPeer peerID: MCPeerID,
+                    withContext context: Data?,
+                    invitationHandler: @escaping (Bool, MCSession) -> Void) {
+        invitationHandler(true, mySession)
+    }
+    
+    // MARK: - Browser.
+    func browser(_ browser: MCNearbyServiceBrowser,
+                 foundPeer peerID: MCPeerID,
+                 withDiscoveryInfo info: [String : String]?) {
+        browser.invitePeer(myPeerId, to: mySession, withContext: nil, timeout: 60)
+    }
+    
+    // MARK: - About MCSession.
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        dispatchQueue.async {
+            // "data: NSData" is recieved data.
+        }
+    }
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String,
+                 fromPeer peerID: MCPeerID, with progress: Progress) {
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String,
+                 fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+    }
+    
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+    }
+    
     // MARK: required method for keyboard delegate protocol
     func keyWasTapped(character: String) {
         userAnswerTxtField.insertText(character)

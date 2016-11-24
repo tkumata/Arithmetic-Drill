@@ -13,6 +13,7 @@
 		890BB4DE1DE3C34300DE19A1 /* ss04.png in Resources */ = {isa = PBXBuildFile; fileRef = 890BB4DA1DE3C34300DE19A1 /* ss04.png */; };
 		8914C4CE1DDACBD800C0097B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8914C4CD1DDACBD800C0097B /* AudioToolbox.framework */; };
 		892D0B9B1DD7F0C50091F3E9 /* KBD.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8982FEBF1DD7D159000EA9E9 /* KBD.xib */; };
+		892D85691DE708780072114C /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892D85681DE708780072114C /* MultipeerConnectivity.framework */; };
 		8965BC401DD022EB00E20CAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965BC3F1DD022EB00E20CAE /* AppDelegate.swift */; };
 		8965BC421DD022EB00E20CAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8965BC411DD022EB00E20CAE /* ViewController.swift */; };
 		8965BC451DD022EB00E20CAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8965BC431DD022EB00E20CAE /* Main.storyboard */; };
@@ -44,6 +45,7 @@
 		890BB4D91DE3C34300DE19A1 /* ss03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ss03.png; sourceTree = "<group>"; };
 		890BB4DA1DE3C34300DE19A1 /* ss04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ss04.png; sourceTree = "<group>"; };
 		8914C4CD1DDACBD800C0097B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		892D85681DE708780072114C /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		8965BC3C1DD022EA00E20CAE /* Arithmetic Drill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Arithmetic Drill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8965BC3F1DD022EB00E20CAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8965BC411DD022EB00E20CAE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				892D85691DE708780072114C /* MultipeerConnectivity.framework in Frameworks */,
 				8914C4CE1DDACBD800C0097B /* AudioToolbox.framework in Frameworks */,
 				897EC4BF1DD9E3800087C859 /* AVFoundation.framework in Frameworks */,
 			);
@@ -124,6 +127,7 @@
 		897EC4BD1DD9E3800087C859 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				892D85681DE708780072114C /* MultipeerConnectivity.framework */,
 				8914C4CD1DDACBD800C0097B /* AudioToolbox.framework */,
 				897EC4BE1DD9E3800087C859 /* AVFoundation.framework */,
 			);
@@ -342,6 +346,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.kmt.Arithmetic-Drill";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -356,6 +361,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.kmt.Arithmetic-Drill";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
