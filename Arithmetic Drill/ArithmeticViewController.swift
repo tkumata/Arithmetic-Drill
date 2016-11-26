@@ -11,7 +11,7 @@ import AVFoundation
 import AudioToolbox.AudioServices
 import MultipeerConnectivity
 
-class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate, MCSessionDelegate {
+class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate, MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate {
 
     // Read User Default
     let userData = UserDefaults.standard
@@ -42,8 +42,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     // Peer connectivity.
     let myPeerId = MCPeerID(displayName: UIDevice.current.name)
     var mySession: MCSession!
-    var serviceAdvertiser: MCNearbyServiceAdvertiser!
-    var browser: MCNearbyServiceBrowser!
+    var serviceAdvertiser: MCNearbyServiceAdvertiser?
+    var browser: MCNearbyServiceBrowser?
     let dispatchQueue = DispatchQueue(label: "ArithmeticDrillQueue")
     
     // Outlet
@@ -55,16 +55,13 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     
     // Action
     @IBAction func vsModeButtonAction(_ sender: UIButton) {
-        browser.startBrowsingForPeers()
+        self.browser?.startBrowsingForPeers()
     }
     
     // MARK: - When tap Next Question button.
     @IBAction func nextQuestionButton(_ sender: Any) {
         // Stop and initialize timer when timer moves already.
         stopTimer()
-        
-        // Remove image on screen.
-//        removeResultImage()
         
         // MARK: Prepare textfield.
         userAnswerTxtField.isEnabled = true
@@ -234,48 +231,50 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         
         // Multipeer Connectivity.
         let serviceType = "ArithmeticDrill"
-        mySession = MCSession(peer: myPeerId)
+        mySession = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .required)
         mySession.delegate = self
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: serviceType)
-        serviceAdvertiser.startAdvertisingPeer()
+        serviceAdvertiser?.delegate = self
+        self.serviceAdvertiser?.startAdvertisingPeer()
         browser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
-
+        browser?.delegate = self
+        
         // Finaly, start arithmetic drill.
         nextQuestionButton(self)
     }
 
     // MARK: - Advertiser.
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
-                    didReceiveInvitationFromPeer peerID: MCPeerID,
-                    withContext context: Data?,
-                    invitationHandler: @escaping (Bool, MCSession) -> Void) {
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
+    }
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping(Bool, MCSession?) -> Void) {
         invitationHandler(true, mySession)
     }
     
     // MARK: - Browser.
-    func browser(_ browser: MCNearbyServiceBrowser,
-                 foundPeer peerID: MCPeerID,
-                 withDiscoveryInfo info: [String : String]?) {
-        browser.invitePeer(myPeerId, to: mySession, withContext: nil, timeout: 60)
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        self.browser?.invitePeer(myPeerId, to: mySession, withContext: nil, timeout: 60)
+        print("browsing...")
+    }
+    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+    }
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
     }
     
     // MARK: - About MCSession.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         dispatchQueue.async {
             // "data: NSData" is recieved data.
+            // TODO: 対戦中の得点のやりとりはここに
         }
     }
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String,
                  fromPeer peerID: MCPeerID, with progress: Progress) {
     }
-    
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String,
                  fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
     }
-    
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
     }
-    
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
     }
     
@@ -487,7 +486,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     func removeResultImage() {
         if imageView != nil {
             imageView.removeFromSuperview()
-            // imageView.image = nil
         }
     }
 
