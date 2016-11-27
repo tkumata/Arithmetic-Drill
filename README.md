@@ -21,7 +21,7 @@ X position randomly changes each question. Is this similar to KUMON? I do not kn
 - [ ] 画面デザイン見直し
 - [ ] 遊び要素入れたい
 - [ ] 得点ランキング
-- [ ] 対戦
+- [x] 対戦
 - [x] バーストモード
 - [x] レベル設定
 - [x] 待ち時間なしモード

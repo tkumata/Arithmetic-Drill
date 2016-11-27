@@ -11,7 +11,7 @@ import AVFoundation
 import AudioToolbox.AudioServices
 import MultipeerConnectivity
 
-class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate, MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate {
+class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate, MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCBrowserViewControllerDelegate {
 
     // Read User Default
     let userData = UserDefaults.standard
@@ -40,11 +40,14 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     var player: AVAudioPlayer?
     
     // Peer connectivity.
+    let serviceType = "ArithmeticDrill"
     let myPeerId = MCPeerID(displayName: UIDevice.current.name)
     var mySession: MCSession!
-    var serviceAdvertiser: MCNearbyServiceAdvertiser?
-    var browser: MCNearbyServiceBrowser?
-    let dispatchQueue = DispatchQueue(label: "ArithmeticDrillQueue")
+    var serviceAdvertiser: MCNearbyServiceAdvertiser!
+    var serviceAdvertiserAssistant: MCAdvertiserAssistant!
+    var browser: MCNearbyServiceBrowser!
+    var invitationHandler: (Bool, MCSession?) -> Void = { success, session in }
+//    let dispatchQueue = DispatchQueue(label: "ArithmeticDrillQueue")
     
     // Outlet
     @IBOutlet weak var scoreLabel: UILabel!
@@ -54,8 +57,15 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     @IBOutlet weak var userAnswerTxtField: UITextField!
     
     // Action
+    // MARK: - Start multipeer browsing.
     @IBAction func vsModeButtonAction(_ sender: UIButton) {
-        self.browser?.startBrowsingForPeers()
+//        self.browser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
+//        self.browser.delegate = self
+//        self.browser.startBrowsingForPeers()
+        
+        let Browser = MCBrowserViewController(serviceType: serviceType, session: mySession)
+        Browser.delegate = self
+        present(Browser, animated: true)
     }
     
     // MARK: - When tap Next Question button.
@@ -230,52 +240,84 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         userAnswerTxtField.inputView = keyboardView
         
         // Multipeer Connectivity.
-        let serviceType = "ArithmeticDrill"
-        mySession = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .required)
-        mySession.delegate = self
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: serviceType)
-        serviceAdvertiser?.delegate = self
-        self.serviceAdvertiser?.startAdvertisingPeer()
-        browser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
-        browser?.delegate = self
-        
+        self.mySession = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .required)
+        self.mySession.delegate = self
+        self.serviceAdvertiserAssistant = MCAdvertiserAssistant(serviceType: serviceType, discoveryInfo: nil, session: mySession)
+        self.serviceAdvertiserAssistant.start()
+        self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: serviceType)
+        self.serviceAdvertiser.delegate = self
+        self.serviceAdvertiser.startAdvertisingPeer()
+
+
         // Finaly, start arithmetic drill.
         nextQuestionButton(self)
     }
 
-    // MARK: - Advertiser.
+    // MARK: - MCAdvertiser.
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
     }
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping(Bool, MCSession?) -> Void) {
-        invitationHandler(true, mySession)
+//        let accept = mySession.myPeerID.hashValue > myPeerId.hashValue
+//        invitationHandler(accept, mySession)
+//        invitationHandler(true, self.mySession)
     }
     
-    // MARK: - Browser.
+    // MARK: - MCBrowser.
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        self.browser?.invitePeer(myPeerId, to: mySession, withContext: nil, timeout: 60)
-        print("browsing...")
+        print("found peer and send invitation.")
+//        self.browser.invitePeer(myPeerId, to: mySession, withContext: nil, timeout: 30)
     }
     func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
     }
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
     }
     
-    // MARK: - About MCSession.
+    // MARK: - MCSession.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        dispatchQueue.async {
+        // TODO: 対戦中の得点のやりとりはここに
+        DispatchQueue.main.async {
             // "data: NSData" is recieved data.
-            // TODO: 対戦中の得点のやりとりはここに
+            var out: UInt8 = 0
+            data.copyBytes(to: &out, count: MemoryLayout<UInt8>.size)
+            let damage = Int(out)
+            print("receive damage: " + String(damage))
+            
+            // Update score.
+            self.score -= damage
+            self.accuracyRate = Double(self.questionCorrect * 100 / self.questionNumber)
+            self.scoreLabel.text = "Score: " + String(self.score) + "(" + String(self.accuracyRate) + "%)"
         }
     }
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String,
-                 fromPeer peerID: MCPeerID, with progress: Progress) {
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
     }
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String,
-                 fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
     }
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
     }
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+    }
+    
+    //
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    
+    // Send data.
+    func sendPoint(point: Int) {
+        var p = NSInteger(point)
+        let data = NSData(bytes: &p, length: 1)
+        if mySession.connectedPeers.count > 0 {
+            do {
+                try mySession.send(data as Data, toPeers: mySession.connectedPeers, with: .reliable)
+                print("send data.")
+            } catch let error as NSError {
+                print(error)
+            }
+        }
     }
     
     // MARK: required method for keyboard delegate protocol
@@ -340,6 +382,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             if timerCounter > 0 {
                 score += timerCounter
                 tmpMessage = "Correct"
+                sendPoint(point: timerCounter)
             }
             
             // Bonus point
