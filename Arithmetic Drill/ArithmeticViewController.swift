@@ -207,12 +207,12 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         hiscore = userData.integer(forKey: "HISCORE")
         hiAccuracyRate = userData.double(forKey: "HIRATE")
         
-        // Restore score and accuracy rate.
-        score = userData.integer(forKey: "SCORE")
-        questionNumber = userData.integer(forKey: "QNUM")
-        questionCorrect = userData.integer(forKey: "CORRECTNUM")
-        
-        if settingContinue && score > 0 && questionCorrect > 0 && questionNumber > 0 {
+        if settingContinue {
+            // Restore score and accuracy rate.
+            score = userData.integer(forKey: "SCORE")
+            questionNumber = userData.integer(forKey: "QNUM")
+            questionCorrect = userData.integer(forKey: "CORRECTNUM")
+            
             accuracyRate = Double(questionCorrect * 100 / questionNumber)
             scoreLabel.text = "Score: " + String(score) + "(" + String(accuracyRate) + "%)"
         } else {
@@ -310,6 +310,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             }
         }
     }
+    
     
     // MARK: required method for keyboard delegate protocol
     func keyWasTapped(character: String) {
@@ -502,6 +503,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
 
     
     // MARK: - Image when receive damage at VS mode.
+    // TODO: 上の答え合わせ結果画像と合わせてクラスにしよう。
     func receiveDamageEffect() {
         let imgFileName: String = "down.png"
         
