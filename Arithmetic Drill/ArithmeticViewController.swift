@@ -203,6 +203,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         // VS mode button attributes.
         vsModeButtonOutlet.layer.borderWidth = 1.0
         vsModeButtonOutlet.layer.cornerRadius = 5.0
+        vsModeButtonOutlet.layer.borderColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0).cgColor
         vsModeButtonOutlet.tintColor = .white
         vsModeButtonOutlet.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0)
         
@@ -242,11 +243,11 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         userAnswerTxtField.inputView = keyboardView
         
         // Multipeer Connectivity.
-        self.mySession = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .required)
-        self.mySession.delegate = self
-        self.serviceAdvertiserAssistant = MCAdvertiserAssistant(serviceType: serviceType, discoveryInfo: nil, session: mySession)
-        self.serviceAdvertiserAssistant.start()
-
+        mySession = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .required)
+        mySession.delegate = self
+        serviceAdvertiserAssistant = MCAdvertiserAssistant(serviceType: serviceType, discoveryInfo: nil, session: mySession)
+        serviceAdvertiserAssistant.start()
+        
 
         // Finaly, start arithmetic drill.
         nextQuestionButton(self)
@@ -261,7 +262,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     
     // MARK: - MCBrowser.
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        print("found peer and send invitation.")
     }
     func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
     }
@@ -293,13 +293,42 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             self.scoreLabel.text = "Score: " + String(self.score) + "(" + String(self.accuracyRate) + "%)"
         }
     }
+    // MARK: MCSession status
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        switch state {
+        case MCSessionState.connected:
+            //print("Connected: \(peerID.displayName)")
+            // VS mode button attributes.
+            vsModeButtonOutlet.layer.borderWidth = 1.0
+            vsModeButtonOutlet.layer.cornerRadius = 5.0
+            vsModeButtonOutlet.layer.borderColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0).cgColor
+            vsModeButtonOutlet.tintColor = .blue
+            vsModeButtonOutlet.backgroundColor = .white
+            
+        case MCSessionState.connecting:
+            //print("Connecting: \(peerID.displayName)")
+            // VS mode button attributes.
+            vsModeButtonOutlet.layer.borderWidth = 1.0
+            vsModeButtonOutlet.layer.cornerRadius = 5.0
+            vsModeButtonOutlet.layer.borderColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0).cgColor
+            vsModeButtonOutlet.tintColor = .blue
+            vsModeButtonOutlet.backgroundColor = .white
+            
+        case MCSessionState.notConnected:
+            //print("Not Connected: \(peerID.displayName)")
+            // VS mode button attributes.
+            vsModeButtonOutlet.layer.borderWidth = 1.0
+            vsModeButtonOutlet.layer.cornerRadius = 5.0
+            vsModeButtonOutlet.layer.borderColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0).cgColor
+            vsModeButtonOutlet.tintColor = .white
+            vsModeButtonOutlet.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0)
+        }
+    }
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
     }
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
     }
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-    }
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
     }
     // MARK: - Send data via MCSession.
     func sendPoint(point: Int) {
@@ -309,7 +338,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         if mySession.connectedPeers.count > 0 {
             do {
                 try mySession.send(data as Data, toPeers: mySession.connectedPeers, with: .reliable)
-                print("send damage point.")
+                //print("send damage point.")
             } catch let error as NSError {
                 print(error)
             }
@@ -340,6 +369,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopTimer()
+        serviceAdvertiserAssistant.stop()
         
         settingsBurstMode = false
         userAnswerTxtField.isEnabled = false
@@ -525,7 +555,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         
         // Animate view.
         UIView.animate(
-            withDuration: 0.5,
+            withDuration: 0.1,
             delay: 0,
             options: [.curveEaseInOut],
             animations: {
