@@ -46,8 +46,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     var serviceAdvertiser: MCNearbyServiceAdvertiser!
     var serviceAdvertiserAssistant: MCAdvertiserAssistant!
     var browser: MCNearbyServiceBrowser!
-    var invitationHandler: (Bool, MCSession?) -> Void = { success, session in }
-//    let dispatchQueue = DispatchQueue(label: "ArithmeticDrillQueue")
     
     // Outlet
     @IBOutlet weak var scoreLabel: UILabel!
@@ -59,10 +57,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     // Action
     // MARK: - Start multipeer browsing.
     @IBAction func vsModeButtonAction(_ sender: UIButton) {
-//        self.browser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: serviceType)
-//        self.browser.delegate = self
-//        self.browser.startBrowsingForPeers()
-        
         let Browser = MCBrowserViewController(serviceType: serviceType, session: mySession)
         Browser.delegate = self
         present(Browser, animated: true)
@@ -244,9 +238,6 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         self.mySession.delegate = self
         self.serviceAdvertiserAssistant = MCAdvertiserAssistant(serviceType: serviceType, discoveryInfo: nil, session: mySession)
         self.serviceAdvertiserAssistant.start()
-        self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: serviceType)
-        self.serviceAdvertiser.delegate = self
-        self.serviceAdvertiser.startAdvertisingPeer()
 
 
         // Finaly, start arithmetic drill.
@@ -257,15 +248,11 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
     }
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping(Bool, MCSession?) -> Void) {
-//        let accept = mySession.myPeerID.hashValue > myPeerId.hashValue
-//        invitationHandler(accept, mySession)
-//        invitationHandler(true, self.mySession)
     }
     
     // MARK: - MCBrowser.
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         print("found peer and send invitation.")
-//        self.browser.invitePeer(myPeerId, to: mySession, withContext: nil, timeout: 30)
     }
     func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
     }
@@ -275,12 +262,15 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     // MARK: - MCSession.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         // TODO: 対戦中の得点のやりとりはここに
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [unowned self] in
             // "data: NSData" is recieved data.
-            var out: UInt8 = 0
-            data.copyBytes(to: &out, count: MemoryLayout<UInt8>.size)
-            let damage = Int(out)
+            var dataToUInt8: UInt8 = 0
+            data.copyBytes(to: &dataToUInt8, count: MemoryLayout<UInt8>.size)
+            let damage = Int(dataToUInt8)
             print("receive damage: " + String(damage))
+            
+            // Image effect.
+            self.receiveDamageEffect()
             
             // Update score.
             self.score -= damage
@@ -310,10 +300,11 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     func sendPoint(point: Int) {
         var p = NSInteger(point)
         let data = NSData(bytes: &p, length: 1)
+        
         if mySession.connectedPeers.count > 0 {
             do {
                 try mySession.send(data as Data, toPeers: mySession.connectedPeers, with: .reliable)
-                print("send data.")
+                print("send damage point.")
             } catch let error as NSError {
                 print(error)
             }
@@ -509,6 +500,34 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         })
     }
 
+    
+    // MARK: - Image when receive damage at VS mode.
+    func receiveDamageEffect() {
+        let imgFileName: String = "down.png"
+        
+        // Add image to sub view.
+        let rect = CGRect(x: (view.frame.width/2)-(view.frame.width*0.65)/2,
+                          y: (view.frame.height/2)-(view.frame.height/2)/2+(view.frame.height*0.1),
+                          width: view.frame.width*0.65,
+                          height: view.frame.height*0.65)
+        imageView = UIImageView(frame: rect)
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: imgFileName)
+        imageView.alpha = 0
+        self.view.addSubview(imageView)
+        
+        // Animate view.
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            options: [.curveEaseInOut],
+            animations: {
+                self.imageView.alpha = 1.0
+            },
+            completion: {(finished: Bool) in
+                self.fadeOutImage(self.imageView)
+        })
+    }
 
     // MARK: - Function which remove image on screen.
     func fadeOutImage(_ view: UIView) {
