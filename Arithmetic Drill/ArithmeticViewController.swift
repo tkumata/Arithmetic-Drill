@@ -53,6 +53,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var userAnswerTxtField: UITextField!
+    @IBOutlet weak var vsModeButtonOutlet: UIButton!
     
     // Action
     // MARK: - Start multipeer browsing.
@@ -192,11 +193,18 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         // Attributes.
         // Question label.
         questionLabel.text = ""
+        
         // Message label.
         messageLabel.text = ""
         messageLabel.layer.cornerRadius = 10.0
         messageLabel.layer.borderWidth = 1.0
         messageLabel.layer.borderColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0).cgColor
+        
+        // VS mode button attributes.
+        vsModeButtonOutlet.layer.borderWidth = 1.0
+        vsModeButtonOutlet.layer.cornerRadius = 5.0
+        vsModeButtonOutlet.tintColor = .white
+        vsModeButtonOutlet.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0)
         
         // Read settings in User Default.
         settingsLevel = userData.integer(forKey: "LEVEL")
@@ -204,11 +212,9 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         settingsDisable10 = userData.bool(forKey: "DISABLE10")
         settingsKukuMode = userData.bool(forKey: "99MODE")
         settingContinue = userData.bool(forKey: "CONTINUE")
-        hiscore = userData.integer(forKey: "HISCORE")
-        hiAccuracyRate = userData.double(forKey: "HIRATE")
         
+        // Restore score and accuracy rate.
         if settingContinue {
-            // Restore score and accuracy rate.
             score = userData.integer(forKey: "SCORE")
             questionNumber = userData.integer(forKey: "QNUM")
             questionCorrect = userData.integer(forKey: "CORRECTNUM")
@@ -220,6 +226,8 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         }
         
         // Restore hiscore and hight accuracy rate.
+        hiscore = userData.integer(forKey: "HISCORE")
+        hiAccuracyRate = userData.double(forKey: "HIRATE")
         hiscoreLabel.text = "HiScore: " + String(hiscore) + "(" + String(hiAccuracyRate) + "%)"
         
         // textfield delegate.
@@ -244,6 +252,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         nextQuestionButton(self)
     }
 
+    
     // MARK: - MCAdvertiser.
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
     }
@@ -258,6 +267,12 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     }
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
     }
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true)
+    }
     
     // MARK: - MCSession.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
@@ -267,7 +282,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             var dataToUInt8: UInt8 = 0
             data.copyBytes(to: &dataToUInt8, count: MemoryLayout<UInt8>.size)
             let damage = Int(dataToUInt8)
-            print("receive damage: " + String(damage))
+            //print("receive damage: " + String(damage))
             
             // Image effect.
             self.receiveDamageEffect()
@@ -286,17 +301,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     }
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
     }
-    
-    //
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true)
-    }
-    
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true)
-    }
-    
-    // Send data.
+    // MARK: - Send data via MCSession.
     func sendPoint(point: Int) {
         var p = NSInteger(point)
         let data = NSData(bytes: &p, length: 1)

@@ -219,6 +219,7 @@
                         <outlet property="questionLabel" destination="hRd-GG-DfR" id="aYH-6h-gaD"/>
                         <outlet property="scoreLabel" destination="HXi-Ek-xcT" id="C5c-S1-JgK"/>
                         <outlet property="userAnswerTxtField" destination="kqq-mb-09M" id="Kwz-LE-FfF"/>
+                        <outlet property="vsModeButtonOutlet" destination="8k5-2f-zOA" id="VSj-t4-Vet"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k41-kp-SFU" userLabel="First Responder" sceneMemberID="firstResponder"/>
