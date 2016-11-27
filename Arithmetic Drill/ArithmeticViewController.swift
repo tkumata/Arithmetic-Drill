@@ -304,7 +304,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     // MARK: - Send data via MCSession.
     func sendPoint(point: Int) {
         var p = NSInteger(point)
-        let data = NSData(bytes: &p, length: 1)
+        let data = NSData(bytes: &p, length: MemoryLayout<NSInteger>.size)
         
         if mySession.connectedPeers.count > 0 {
             do {
