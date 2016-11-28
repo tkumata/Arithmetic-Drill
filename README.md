@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a arithmetic drill app for from element school children to elder. Let's train your brain.
+This is a arithmetic drill app for from element school children to elder. Let's train your brain. And this app can against with someone. For example, play with the parents for a betting favourite meal, TV program. I am happay if this app helps a family's communication or learning for children.
 
 !["SS"](./imgs/ss01.png)
 !["SS"](./imgs/ss02.png)
@@ -29,6 +29,7 @@ X position randomly changes each question. Is this similar to KUMON? I do not kn
 - [x] 独自キーボード
 - [x] サイレントモード時はバイブレーション
 - [x] 継続モード
+- [ ] 説明書ページの作成
 
 
 ### About level
