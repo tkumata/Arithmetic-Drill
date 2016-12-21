@@ -276,7 +276,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
     
     // MARK: - MCSession.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        // TODO: 対戦中の得点のやりとりはここに
+        // 対戦中の得点のやりとりはここに
         DispatchQueue.main.async { [unowned self] in
             // "data: NSData" is recieved data.
             var dataToUInt8: UInt8 = 0
