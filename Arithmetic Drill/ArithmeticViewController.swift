@@ -12,7 +12,6 @@ import AudioToolbox.AudioServices
 import MultipeerConnectivity
 
 class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardDelegate, MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCBrowserViewControllerDelegate {
-
     // Read User Default
     let userData = UserDefaults.standard
     
@@ -324,12 +323,37 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
             vsModeButtonOutlet.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1.0)
         }
     }
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+    // Received a byte stream from remote peer
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID){
+        
     }
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
+    
+    // Start receiving a resource from remote peer
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress){
+        
     }
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+    
+    // Finished receiving a resource from remote peer and saved the content in a temporary location - the app is responsible for moving the file to a permanent location within its sandbox
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+
     }
+    // Found a nearby advertising peer
+    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!){
+        
+    }
+    
+    // A nearby peer has stopped advertising
+    func browser(browser: MCNearbyServiceBrowser!, lostPeer peerID: MCPeerID!){
+        
+    }
+    
+    //Type 'MPCManager' does not comform to protocol 'MCNearbyServiceAdvertiserDelegate'
+    // Incoming invitation request.  Call the invitationHandler block with YES and a valid session to connect the inviting peer to the session.
+    func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession?) -> Void)!){
+    }
+
+
+
     // MARK: - Send data via MCSession.
     func sendPoint(point: Int) {
         var p = NSInteger(point)
@@ -383,6 +407,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
 
 
     // MARK: - 入力終了(キーボードが退場) = 答え合わせ
+    @available(iOS 10.0, *)
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         var tmpMessage: String = ""
         
@@ -482,7 +507,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
 
 
     // MARK: - Function which updates timer.
-    func update(tm: Timer) {
+    @objc func update(tm: Timer) {
         if timerCounter == 0 {
             stopTimer()
             view.endEditing(true)
@@ -513,10 +538,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         }
         
         // Add image to sub view.
-        let rect = CGRect(x: (view.frame.width/2)-(view.frame.width*0.65)/2,
-                          y: (view.frame.height/2)-(view.frame.height/2)/2+(view.frame.height*0.1),
-                          width: view.frame.width*0.65,
-                          height: view.frame.height*0.65)
+        let X = view.frame.width / 2 - view.frame.width * 0.65 / 2
+        let Y = view.frame.height / 2 - view.frame.height * 0.65 / 2
+        let rect = CGRect(x: X, y: Y, width: view.frame.width*0.65, height: view.frame.height*0.65)
+        
         imageView = UIImageView(frame: rect)
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: fileName)
@@ -543,10 +568,10 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         let imgFileName: String = "down.png"
         
         // Add image to sub view.
-        let rect = CGRect(x: (view.frame.width/2)-(view.frame.width*0.65)/2,
-                          y: (view.frame.height/2)-(view.frame.height/2)/2+(view.frame.height*0.1),
-                          width: view.frame.width*0.65,
-                          height: view.frame.height*0.65)
+        let X = view.frame.width / 2 - view.frame.width * 0.65 / 2
+        let Y = view.frame.height / 2 - view.frame.height * 0.65 / 2
+        let rect = CGRect(x: X, y: Y, width: view.frame.width*0.65, height: view.frame.height*0.65)
+
         imageView = UIImageView(frame: rect)
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: imgFileName)
@@ -600,7 +625,7 @@ class ArithmeticViewController: UIViewController, UITextFieldDelegate, KeyboardD
         }
 
         do {
-            player = try AVAudioPlayer(data: soundFile.data, fileTypeHint: AVFileTypeMPEGLayer3)
+            player = try AVAudioPlayer(data: soundFile.data, fileTypeHint: AVFileType.mp3.rawValue)
             guard let player = player else { return }
             
             player.prepareToPlay()
